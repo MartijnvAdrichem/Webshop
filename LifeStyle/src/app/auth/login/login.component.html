@@ -1,0 +1,37 @@
+<div class="row" id="login">
+  <div class="col-md-3"></div>
+<div class="col-md-6 col-xs-12">
+<mat-card>
+
+  <mat-card-header>
+    <mat-card-title>
+      <h1>Inloggen</h1>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <img class="logo" src="https://pbs.twimg.com/profile_images/643365769825222656/yEO_DhaH_400x400.jpg">
+    <form name="loginForm" #loginForm="ngForm" (ngSubmit)="login()">
+
+      <mat-form-field class="full-width">
+        <input matInput type="username" name="username" placeholder="Gebruikersnaam" required [(ngModel)]="credentials.username" #username="ngModel" />
+        <mat-error [hidden]="username.valid">
+          Dit veld is verplicht
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="full-width">
+        <input matInput type="password" name="password" placeholder="Wachtwoord" required [(ngModel)]="credentials.password" #password="ngModel" />
+        <mat-error [hidden]="password.valid">
+          Dit veld is verplicht
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button type="submit" class="mat-primary" [disabled]="!loginForm.valid">Inloggen</button>
+    </form>
+
+  </mat-card-content>
+
+</mat-card>
+</div>
+</div>
