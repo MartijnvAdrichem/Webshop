@@ -1,0 +1,17 @@
+apiName: "LifeStyleAPI"
+
+assets:
+  mappings:
+    /assets: /
+  overrides:
+    /: LifeStyle/dist/
+
+server:
+  rootPath: /api/*
+  adminContextPath: /admin
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081

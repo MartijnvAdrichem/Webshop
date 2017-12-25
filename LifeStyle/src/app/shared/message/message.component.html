@@ -1,0 +1,11 @@
+<div *ngIf="isSuccess == true">
+  <span class="message-snackbar">
+    {{message}} <i class="fa fa-2x fa-check text-green pull-right"></i>
+  </span>
+</div>
+<div *ngIf="isSuccess == false">
+  <span class="message-snackbar">
+    {{message}} <i class="fa fa-2x fa-times text-red pull-right"></i>
+  </span>
+</div>
+

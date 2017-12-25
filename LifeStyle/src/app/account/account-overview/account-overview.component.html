@@ -1,0 +1,54 @@
+<mat-card>
+  <div id="account-table">
+    <mat-card-header>
+      <mat-card-title><h1>Accounts</h1></mat-card-title>
+    </mat-card-header>
+  </div>
+
+
+  <mat-card-content>
+    <div class ="row">
+      <div class="col-md-3 tableCol">
+        <div class="row">
+          <mat-radio-group [(ngModel)]="currentFilter">
+            <mat-radio-button (change)="setFilter('Active')"  value="active">Actief</mat-radio-button>
+            <mat-radio-button (change)="setFilter('NActive')" value="nactive">Non-Actief</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="row">
+          <mat-table class="table" [dataSource]="dataSource">
+            <ng-container matColumnDef="firstname">
+              <mat-header-cell *matHeaderCellDef> Accounts </mat-header-cell>
+              <mat-cell class="clickableAccount" *matCellDef="let account" [class.selected]="account === selectedAccount" (click)="onSelect(account)"> {{account.firstname }} {{account.prefix}} {{account.lastname}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+
+
+        <div class="row">
+          <button mat-raised-button class="mat-warn lscnlButton" routerLinkActive="selected-button" (click)="goNewAccount()"><span>Nieuw Account</span></button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div id = "account-info" *ngIf="selectedAccount">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>Account Informatie</mat-card-title>
+                <mat-card-subtitle>{{selectedAccount.firstname}} {{selectedAccount.prefix}} {{selectedAccount.lastname}}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p id="client-info-text">
+                  <strong>Accountnaam:</strong> {{selectedAccount.username}}
+                  <br><strong>Is Admin:</strong> {{selectedAccount.isAdmin}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions><button mat-raised-button class="mat-warn lscnlButton" [disabled]="!selectedAccount" routerLinkActive="selected-button"  (click)="goEditAccount()"><span>Aanpassen</span></button></mat-card-actions>
+            </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

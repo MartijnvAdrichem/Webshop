@@ -1,0 +1,6 @@
+.main-sidebar {
+  position: fixed !important;
+}
+ .sidebar-menu:hover {
+   cursor:pointer
+ }
