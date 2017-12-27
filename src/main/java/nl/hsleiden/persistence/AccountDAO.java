@@ -25,9 +25,7 @@ public class AccountDAO
 	private PreparedStatement selectAllAccountsStatement;
 	private PreparedStatement authenticateStatement;
 	private PreparedStatement getGebruikerZonderWachtwoord;
-	private PreparedStatement selectStatement;
 	private PreparedStatement updateStatement;
-	private PreparedStatement updateSettingsStatement;
 
 	public DatabaseService databaseService;
 	@Inject
@@ -39,14 +37,12 @@ public class AccountDAO
 
 	private void prepareStatements(){
 		try{
-			createStatement = databaseService.getConnection().prepareStatement("INSERT INTO account(acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_accountsnaam, acc_wachtwoord, acc_isadmin, acc_isactief, acc_deaclient, acc_deaprod) VALUES (?, ?, ?, ?, ?, ?, ?,false,false)");
-			updateSettingsStatement = databaseService.getConnection().prepareStatement("UPDATE account SET acc_deaclient = ?, acc_deaprod = ? WHERE acc_id = ? ");
+			createStatement = databaseService.getConnection().prepareStatement("INSERT INTO account(acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email, acc_wachtwoord, acc_straat, acc_postcode, acc_huisnr, acc_woonplaats ) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)");
 			getAccountByIdStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account WHERE acc_id = ?");
 			selectAllAccountsStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account");
 			getGebruikerZonderWachtwoord = databaseService.getConnection().prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email  FROM account WHERE acc_email = ?");
 			authenticateStatement = databaseService.getConnection().prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email FROM account WHERE acc_email = ? AND acc_wachtwoord = ?");
-			selectStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account");
-			updateStatement = databaseService.getConnection().prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_accountsnaam = ?, acc_wachtwoord = ?, acc_isadmin = ?, acc_isactief = ? WHERE acc_id = ? ");
+			updateStatement = databaseService.getConnection().prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_email = ?, acc_wachtwoord = ?, acc_straat = ?, acc_postcode = ?, acc_huisnr = ?, acc_woonplaats = ? WHERE acc_id = ? ");
 		}
 		catch(SQLException e){
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
@@ -58,10 +54,12 @@ public class AccountDAO
 			createStatement.setString(1, account.getFirstname());
 			createStatement.setString(2, account.getPrefix());
 			createStatement.setString(3,account.getLastname());
-			createStatement.setString(4,account.getUsername());
+			createStatement.setString(4,account.geteMail());
 			createStatement.setString(5, account.getPassword());
-			createStatement.setBoolean(6,  account.getAdmin());
-			createStatement.setBoolean(7,  account.getActive());
+			createStatement.setString(6,  account.getStreet());
+			createStatement.setString(7,  account.getZipCode());
+			createStatement.setString(8,  account.getHouseNumber());
+			createStatement.setString(9,  account.getTown());
 
 			createStatement.executeUpdate();
 			return new HttpResponse(Response.Status.OK, "Account succesvol toegevoegd");
@@ -72,7 +70,7 @@ public class AccountDAO
 		}
 	}
 
-	public HttpResponse updateAccount(Account account){
+/*	public HttpResponse updateAccount(Account account){
 		try {
 			updateStatement.setString(1, account.getFirstname());
 			updateStatement.setString(2, account.getPrefix());
@@ -92,6 +90,7 @@ public class AccountDAO
 		}
 
 	}
+*/
 
 	public Account getAccountById(int id){
 		try{
@@ -168,26 +167,6 @@ public class AccountDAO
 		return null;
 	}
 
-
-
-
-	public ArrayList<Account> getAllAccounts(){
-		ArrayList<Account> accounts = new ArrayList<>();
-		try {
-			ResultSet allClients = selectStatement.executeQuery();
-			while(allClients.next() ){
-				Account account = makeAccount(allClients);
-				if(account == null){
-					continue;
-				}
-				accounts.add(account);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return accounts;
-	}
-
 	public Account makeAccount(ResultSet rs){
 		try {
 			Account account = new Account();
@@ -205,15 +184,5 @@ public class AccountDAO
 		return null;
 	}
 
-	public void updateSettings(Account account){
-		try {
-			updateSettingsStatement.setBoolean(1, account.getInactiveClients());
-			updateSettingsStatement.setBoolean(2, account.getInactiveProducts());
-			updateSettingsStatement.setInt(3, account.getId());
-			updateSettingsStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 }

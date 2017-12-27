@@ -8,8 +8,6 @@ import {isUndefined} from "util";
 @Injectable()
 export class AuthService {
 
-  isAdmin:boolean;
-
   public login(body): Observable<JSON> {
     return this.http.post("/api/login", body);
   }
@@ -17,13 +15,7 @@ export class AuthService {
   public logout(): void {
     this.tokenService.deleteToken();
   }
-  public setIsAdmin(): void{
-     this.getAuthenticatedUser().subscribe(
-      resultAccount => {
-        this.isAdmin = resultAccount.isAdmin;
-      }
-    );
-  }
+
   public getAuthenticatedUser(): Observable<Account> {
     return this.http.get<Account>("/api/account/me");
   }

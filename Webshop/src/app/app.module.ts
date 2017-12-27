@@ -13,7 +13,7 @@ import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {HeaderComponent} from "./shared/header/header.component";
 import {LoginComponent} from "./auth/login/login.component";
-import {AccountCreateComponent} from "./account/account-create/account-create.component";
+import {AccountRegisterComponent} from "./account/account-register/account-register.component";
 import {AccountInzageComponent} from "./account/account-overview/account-overview.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -34,7 +34,7 @@ import {AccountComponent} from "./account/account.component";
   declarations: [
     AppComponent,
     LoginComponent,
-    AccountCreateComponent,
+    AccountRegisterComponent,
     AccountInzageComponent,
     MessageComponent,
     AccountComponent,

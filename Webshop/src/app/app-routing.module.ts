@@ -6,13 +6,12 @@ import {LoginComponent} from "./auth/login/login.component";
 import {RouterModule, Routes} from "@angular/router";
 import {AccountComponent} from "./account/account.component";
 import {NgModule} from "@angular/core";
-import {AccountCreateComponent} from "./account/account-create/account-create.component";
+import {AccountRegisterComponent} from "./account/account-register/account-register.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', canActivate: [AuthGuardService], pathMatch: "full"},
+  { path: '', redirectTo: 'account', pathMatch: "full"},
   { path: 'login', component: LoginComponent},
-  { path: 'account', component: AccountComponent , canActivate: [AuthGuardService]},
-  { path: 'account/new', component: AccountCreateComponent, canActivate: [AuthGuardService]},
+  { path: 'account/register', component: AccountRegisterComponent},
 ];
 
 @NgModule({

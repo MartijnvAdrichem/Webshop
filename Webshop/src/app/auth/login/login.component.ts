@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
         let token = data['token'];
         this.tokenService.setToken(token);
         this.router.navigate(['account']);
-        this.authService.setIsAdmin();
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 403) {

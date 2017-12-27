@@ -1,29 +1,22 @@
-<header class="main-header">
-
-  <a href="/" class="logo">
-    <span class="logo-mini"><b>LSC</b></span>
-    <span class="logo-lg"><b>LifeStye Coaching</b></span>
-  </a>
-
-  <nav class="navbar navbar-static-top">
-    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-      <span class="sr-only">Toggle navigation</span>
-    </a>
-    <div class="navbar-custom-menu">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="" (click)="logout()">Logout  <i class="fa fa-sign-out"></i></a>
-        </li>
-      </ul>
+<div id="header">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="account">Marvel Comics</a>
     </div>
-
-  </nav>
-</header>
-
-<aside class="main-sidebar">
-  <section class="sidebar">
-    <ul class="sidebar-menu" data-widget="tree">
-      <li routerLinkActive="active" routerLink="account" (click)="goAccount()"><a><i class="fa fa-users"></i> <span>Accounts</span></a></li>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="account">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
     </ul>
-  </section>
-</aside>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a routerLink="account/register"><span class="glyphicon glyphicon-user"></span> Registreren</a></li>
+      <li *ngIf="isAuthenticated() == false"><a data-toggle="collapse" data-target="#login"><span class="glyphicon glyphicon-log-in"></span>Inloggen</a></li>
+      <li *ngIf="isAuthenticated() == true"><a data-toggle="collapse" data-target="#login"><span class="glyphicon glyphicon-log-in"></span>Mijn account</a></li>
+    </ul>
+  </div>
+</nav>
+</div>
+<div id="login" *ngIf="isAuthenticated() == false" class="collapse">
+  <app-login></app-login>
+</div>

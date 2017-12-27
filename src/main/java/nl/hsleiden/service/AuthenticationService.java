@@ -32,8 +32,7 @@ public class AuthenticationService implements Authenticator<JwtContext, Account>
     }
 
     @Override
-    public Optional<Account> authenticate(JwtContext context) throws AuthenticationException
-    {
+    public Optional<Account> authenticate(JwtContext context) throws AuthenticationException {
             final long userId = (long) context.getJwtClaims().getClaimValue("userID");
             int userIdInt = Math.toIntExact(userId);
             Account account = accountService.getAccountById(userIdInt);
@@ -46,13 +45,11 @@ public class AuthenticationService implements Authenticator<JwtContext, Account>
 
 
     @Override
-    public boolean authorize(Account user, String roleName)
-    {
-        if (user.getAdmin()){
-            return true;
-        } else if (!user.getAdmin() && roleName.equals("USER")) {
-            return true;
-        }
-        return false;
+    public boolean authorize(Account user, String roleName) {
+		if(user == null){
+			return false;
+		}
+
+		return true;
     }
 }

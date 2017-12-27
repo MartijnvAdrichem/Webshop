@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['account']);
   }
 
+  private isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
+
   ngOnInit() {
   }
 

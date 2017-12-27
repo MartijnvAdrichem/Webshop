@@ -32,18 +32,15 @@ export class AccountInzageComponent implements OnInit {
   }
 
   public goNewAccount() {
-    this.accountService.selectedAccount = null;
     this.router.navigate(['/account/new']);
   }
 
   public goEditAccount(){
-    this.accountService.selectedAccount = this.selectedAccount;
     this.router.navigate(['account/new']);
     console.log("goeditaccount");
   }
 
   public goEditOwnAccount(){
-    this.accountService.selectedAccount = this.selectedAccount;
     this.router.navigate(['account/new']);
     console.log("edit own acc");
   }

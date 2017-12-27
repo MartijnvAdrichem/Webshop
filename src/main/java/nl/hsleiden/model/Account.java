@@ -36,49 +36,52 @@ public class Account implements Principal{
 
 	@JsonProperty
 	@NotNull(message = "  is verplicht")
-	@Length(min = 3,max = 50,message = "  mag niet minder dan 3 of meer dan 255 characters zijn")
-	String username;
-
-	@JsonProperty
-	@NotNull(message = "  is verplicht")
 	@Length(min = 5, max = 255, message = "  moet minimaal 5 en maximaal 255 characters lang zijn")
 	String password;
 
 	@JsonProperty
-	Boolean isActive;
+	@NotNull(message = "  is verplicht")
+	@Length(min = 5, max = 50, message = "  moet minimaal 5 en maximaal 100 characters lang zijn")
+	String eMail;
 
 	@JsonProperty
-	Boolean isAdmin;
-
+	@NotNull(message = "  is verplicht")
+	@Length(min = 5, max = 255, message = "  moet minimaal 5 en maximaal 50 characters lang zijn")
+	String street;
 
 	@JsonProperty
-	Boolean inactiveProducts;
+	@NotNull(message = "  is verplicht")
+	@Length(min = 1, max = 4, message = "  moet minimaal 1 en maximaal 4 characters lang zijn")
+	String houseNumber;
+
 	@JsonProperty
-	Boolean inactiveClients;
+	@NotNull(message = "  is verplicht")
+	@Length(min = 6, max = 6, message = "  moet 6 karakters zijn (format 1234AA)")
+	String zipCode;
+
+	@JsonProperty
+	@NotNull(message = "  is verplicht")
+	@Length(min = 1, max = 255, message = "  moet minimaal 1 en maximaal 80 characters lang zijn")
+	String town;
+
+
 
 	public Account(){
 
 	}
 
-	public Account(String firstname, String lasstname, String prefix, String username, String password, Boolean isAdmin, Boolean isActive, Boolean inactiveClients, Boolean inactiveProducts){
+	public Account(String firstname, String lasstname, String prefix,  String password){
 		this.firstname = firstname;
 		this.lastname = lasstname;
 		this.prefix = prefix;
-		this.username = username;
 		this.password = password;
-		this.isAdmin = isAdmin;
-		this.isActive = isActive;
-		this.inactiveClients = inactiveClients;
-		this.inactiveProducts = inactiveProducts;
 	}
-	public Account(int id, String firstname, String lasstname, String prefix, String username, String password, Boolean isAdmin){
+	public Account(int id, String firstname, String lasstname, String prefix,  String password){
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lasstname;
 		this.prefix = prefix;
-		this.username = username;
 		this.password = password;
-		this.isAdmin = isAdmin;
 	}
 
 	public int getId() {
@@ -113,13 +116,6 @@ public class Account implements Principal{
 		this.prefix = prefix;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getPassword() {
 		return password;
@@ -129,46 +125,49 @@ public class Account implements Principal{
 		this.password = password;
 	}
 
-	public Boolean getActive() {
-		return isActive;
+	public String geteMail() {
+		return eMail;
 	}
 
-	public void setActive(Boolean active) {
-		isActive = active;
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
 	}
 
-	public Boolean getAdmin() {
-		return isAdmin;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setAdmin(Boolean admin) {
-		isAdmin = admin;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
-	public Boolean getInactiveProducts() {
-		return inactiveProducts;
+	public String getHouseNumber() {
+		return houseNumber;
 	}
 
-	public void setInactiveProducts(Boolean inactiveProducts) {
-		this.inactiveProducts = inactiveProducts;
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
 	}
 
-	public Boolean getInactiveClients() {
-		return inactiveClients;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setInactiveClients(Boolean inactiveClients) {
-		this.inactiveClients = inactiveClients;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
+	}
+
 
 	@Override
 	public String getName() {
-		return username;
+		return null;
 	}
-
-	public boolean equals(Account account) {
-		return username.equals(account.getUsername());
-	}
-
-
 }

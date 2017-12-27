@@ -8,26 +8,26 @@ import {isUndefined} from "util";
 @Injectable()
 export class AccountService {
 
-  selectedAccount:Account;
   loggedinAccount:Account;
 
   constructor(private http: HttpClient, private router:Router) { }
 
   createAccount(account: Account): Observable<any>{
     let accountGegevens = {
-      //id: account.id,
       firstname: account.firstname,
       prefix: account.prefix,
       lastname: account.lastname,
-      username: account.username,
       password: account.password,
-      isAdmin: account.isAdmin,
-      isActive: account.isActive
+      eMail: account.eMail,
+      street: account.street,
+      houseNumber: account.houseNumber,
+      zipCode: account.zipCode,
+      town: account.town,
     }
 
     console.log(accountGegevens);
 
-   return this.http.post('api/account/create', accountGegevens);
+   return this.http.post('api/account/register', accountGegevens);
   }
 
   updateAccount(account: Account): Observable<any>{
@@ -37,10 +37,7 @@ export class AccountService {
       firstname: account.firstname,
       prefix: account.prefix,
       lastname: account.lastname,
-      username: account.username,
       password: account.password,
-      isAdmin: account.isAdmin,
-      isActive: account.isActive
     }
 
     console.log(accountGegevens);
