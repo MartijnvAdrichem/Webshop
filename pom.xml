@@ -3,7 +3,7 @@
     
     <modelVersion>4.0.0</modelVersion>
     <groupId>nl.hsleiden</groupId>
-    <artifactId>LifeStyleAPI</artifactId>
+    <artifactId>WebshopAPI</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
@@ -73,7 +73,7 @@
             <version>${dropwizard.version}</version>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -112,5 +112,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>

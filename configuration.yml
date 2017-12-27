@@ -4,7 +4,7 @@ assets:
   mappings:
     /assets: /
   overrides:
-    /: LifeStyle/dist/
+    /: Webshop/dist/
 
 server:
   rootPath: /api/*

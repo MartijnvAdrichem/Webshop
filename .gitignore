@@ -1,7 +1,7 @@
 /target/
 /nbproject/
-/LifeStyle/node_modules/
-/LifeStyle/dist/
+/Webshop/node_modules/
+/Webshop/dist/
 
 
 .idea/**/workspace.xml

@@ -39,14 +39,14 @@ public class AccountDAO
 
 	private void prepareStatements(){
 		try{
-			createStatement = databaseService.getConnection().prepareStatement("INSERT INTO gebruiker(geb_voornaam, geb_tussenvoegsel, geb_achternaam, geb_gebruikersnaam, geb_wachtwoord, geb_isadmin, geb_isactief, geb_deaclient, geb_deaprod) VALUES (?, ?, ?, ?, ?, ?, ?,false,false)");
-			updateSettingsStatement = databaseService.getConnection().prepareStatement("UPDATE gebruiker SET geb_deaclient = ?, geb_deaprod = ? WHERE geb_id = ? ");
-			getAccountByIdStatement = databaseService.getConnection().prepareStatement("SELECT * FROM gebruiker WHERE geb_id = ?");
-			selectAllAccountsStatement = databaseService.getConnection().prepareStatement("SELECT * FROM gebruiker");
-			getGebruikerZonderWachtwoord = databaseService.getConnection().prepareStatement("SELECT geb_id, geb_voornaam, geb_tussenvoegsel, geb_achternaam, geb_gebruikersnaam, geb_wachtwoord, geb_isadmin, geb_isactief, geb_deaclient, geb_deaprod  FROM gebruiker WHERE geb_gebruikersnaam = ?");
-			authenticateStatement = databaseService.getConnection().prepareStatement("SELECT geb_id, geb_voornaam, geb_tussenvoegsel, geb_achternaam, geb_gebruikersnaam, geb_wachtwoord, geb_isadmin, geb_deaclient, geb_deaprod FROM gebruiker WHERE geb_gebruikersnaam = ? AND geb_wachtwoord = ?");
-			selectStatement = databaseService.getConnection().prepareStatement("SELECT * FROM gebruiker");
-			updateStatement = databaseService.getConnection().prepareStatement("UPDATE gebruiker SET geb_voornaam = ?, geb_tussenvoegsel = ?, geb_achternaam = ?, geb_gebruikersnaam = ?, geb_wachtwoord = ?, geb_isadmin = ?, geb_isactief = ? WHERE geb_id = ? ");
+			createStatement = databaseService.getConnection().prepareStatement("INSERT INTO account(acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_accountsnaam, acc_wachtwoord, acc_isadmin, acc_isactief, acc_deaclient, acc_deaprod) VALUES (?, ?, ?, ?, ?, ?, ?,false,false)");
+			updateSettingsStatement = databaseService.getConnection().prepareStatement("UPDATE account SET acc_deaclient = ?, acc_deaprod = ? WHERE acc_id = ? ");
+			getAccountByIdStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account WHERE acc_id = ?");
+			selectAllAccountsStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account");
+			getGebruikerZonderWachtwoord = databaseService.getConnection().prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email  FROM account WHERE acc_email = ?");
+			authenticateStatement = databaseService.getConnection().prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email FROM account WHERE acc_email = ? AND acc_wachtwoord = ?");
+			selectStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account");
+			updateStatement = databaseService.getConnection().prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_accountsnaam = ?, acc_wachtwoord = ?, acc_isadmin = ?, acc_isactief = ? WHERE acc_id = ? ");
 		}
 		catch(SQLException e){
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
@@ -104,15 +104,10 @@ public class AccountDAO
 			}
 
 			Account account = new Account();
-			account.setFirstname(resultSet.getString("geb_voornaam"));
-			account.setPrefix(resultSet.getString("geb_tussenvoegsel"));
-			account.setLastname(resultSet.getString("geb_achternaam"));
-			account.setUsername(resultSet.getString("geb_gebruikersnaam"));
-			account.setAdmin(resultSet.getBoolean("geb_isadmin"));
-			account.setActive(resultSet.getBoolean("geb_isactief"));
-			account.setId(resultSet.getInt("geb_id"));
-			account.setInactiveClients(resultSet.getBoolean("geb_deaclient"));
-			account.setInactiveProducts(resultSet.getBoolean("geb_deaprod"));
+			account.setFirstname(resultSet.getString("acc_voornaam"));
+			account.setPrefix(resultSet.getString("acc_tussenvoegsel"));
+			account.setLastname(resultSet.getString("acc_achternaam"));
+			account.setId(resultSet.getInt("acc_id"));
 
 			return account;
 		}
@@ -160,16 +155,10 @@ public class AccountDAO
 
 
 			Account account = new Account();
-			account.setFirstname(resultSet.getString("geb_voornaam"));
-			account.setPrefix(resultSet.getString("geb_tussenvoegsel"));
-			account.setLastname(resultSet.getString("geb_achternaam"));
-			account.setAdmin(resultSet.getBoolean("geb_isadmin"));
-			account.setUsername(resultSet.getString("geb_gebruikersnaam"));
-			account.setActive(resultSet.getBoolean("geb_isactief"));
-			account.setId(resultSet.getInt("geb_id"));
-			account.setInactiveClients(resultSet.getBoolean("geb_deaclient"));
-			account.setInactiveProducts(resultSet.getBoolean("geb_deaprod"));
-
+			account.setFirstname(resultSet.getString("acc_voornaam"));
+			account.setPrefix(resultSet.getString("acc_tussenvoegsel"));
+			account.setLastname(resultSet.getString("acc_achternaam"));
+			account.setId(resultSet.getInt("acc_id"));
 			return account;
 
 
@@ -202,16 +191,11 @@ public class AccountDAO
 	public Account makeAccount(ResultSet rs){
 		try {
 			Account account = new Account();
-			account.setId(rs.getInt("geb_id"));
-			account.setFirstname(rs.getString("geb_voornaam"));
-			account.setLastname(rs.getString("geb_achternaam"));
-			account.setPrefix(rs.getString("geb_tussenvoegsel"));
-			account.setUsername(rs.getString("geb_gebruikersnaam"));
-			account.setPassword(rs.getString("geb_wachtwoord"));
-			account.setAdmin(rs.getBoolean("geb_isadmin"));
-			account.setActive(rs.getBoolean("geb_isactief"));
-			account.setInactiveClients(rs.getBoolean("geb_deaclient"));
-			account.setInactiveProducts(rs.getBoolean("geb_deaprod"));
+			account.setId(rs.getInt("acc_id"));
+			account.setFirstname(rs.getString("acc_voornaam"));
+			account.setLastname(rs.getString("acc_achternaam"));
+			account.setPrefix(rs.getString("acc_tussenvoegsel"));
+			account.setPassword(rs.getString("acc_wachtwoord"));
 
 			return account;
 
