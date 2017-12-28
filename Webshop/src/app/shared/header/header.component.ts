@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthGuardService} from "../../auth/guard/auth-guard.service";
 import {AuthService} from "../../auth/auth.service";
+import {CartService} from "../../cart/cart.service";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import {AuthService} from "../../auth/auth.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router, private authService:AuthService) { }
+  constructor(private router:Router, private authService:AuthService, private cartService:CartService) { }
 
   public logout() {
     this.authService.logout();
