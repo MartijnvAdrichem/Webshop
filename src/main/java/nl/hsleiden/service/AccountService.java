@@ -8,12 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 
-/**
- * Documentatie...
- *
- * @author Guus
- * @since 1.0, 6-12-2017
- */
+
 @Singleton
 public class AccountService {
 

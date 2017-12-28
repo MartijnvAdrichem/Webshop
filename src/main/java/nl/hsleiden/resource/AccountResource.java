@@ -14,10 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
-/**
- *
- * @author Guus Stouten
- */
+
 @Singleton
 @Path("/account")
 @Produces(MediaType.APPLICATION_JSON)

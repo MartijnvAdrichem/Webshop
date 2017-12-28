@@ -12,3 +12,6 @@
   color: black;
   font-family: AvengerFont;
 }
+li {
+  list-style-type: none;
+}

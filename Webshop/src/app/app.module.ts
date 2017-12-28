@@ -30,6 +30,7 @@ import {MessageComponent} from "./shared/message/message.component";
 import {AccountComponent} from "./account/account.component";
 import { ProductComponent } from './product/product.component';
 import { ProductOverviewComponent } from './product/product-overview/product-overview.component';
+import {ProductService} from "./product/product.service";
 
 @NgModule({
   exports: [],
@@ -89,7 +90,7 @@ import { ProductOverviewComponent } from './product/product-overview/product-ove
     MatSnackBarModule,
     MatAutocompleteModule
   ],
-  providers: [AuthService, TokenService, AccountService, MessageService, {
+  providers: [AuthService, TokenService, AccountService, MessageService, ProductService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

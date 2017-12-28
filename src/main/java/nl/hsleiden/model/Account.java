@@ -9,12 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
-/**
- * Documentatie...
- *
- * @author Guus
- * @since 1.0, 6-12-2017
- */
+
 public class Account implements Principal{
 
 	@JsonProperty

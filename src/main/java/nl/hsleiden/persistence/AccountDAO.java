@@ -13,13 +13,8 @@ import nl.hsleiden.model.Account;
 
 import nl.hsleiden.service.DatabaseService;
 
-/**
- *
- * @author Guus Stouten
- */
 @Singleton
-public class AccountDAO
-{
+public class AccountDAO {
 	private PreparedStatement createStatement;
 	private PreparedStatement getAccountByIdStatement;
 	private PreparedStatement selectAllAccountsStatement;
@@ -27,22 +22,22 @@ public class AccountDAO
 	private PreparedStatement getGebruikerZonderWachtwoord;
 	private PreparedStatement updateStatement;
 
-	public DatabaseService databaseService;
+	public Connection dbConnection;
 	@Inject
 	public AccountDAO(DatabaseService databaseService) {
-		this.databaseService = databaseService;
+		this.dbConnection = databaseService.getConnection();
 		prepareStatements();
 
 	}
 
 	private void prepareStatements(){
 		try{
-			createStatement = databaseService.getConnection().prepareStatement("INSERT INTO account(acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email, acc_wachtwoord, acc_straat, acc_postcode, acc_huisnr, acc_woonplaats ) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)");
-			getAccountByIdStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account WHERE acc_id = ?");
-			selectAllAccountsStatement = databaseService.getConnection().prepareStatement("SELECT * FROM account");
-			getGebruikerZonderWachtwoord = databaseService.getConnection().prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email  FROM account WHERE acc_email = ?");
-			authenticateStatement = databaseService.getConnection().prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email FROM account WHERE acc_email = ? AND acc_wachtwoord = ?");
-			updateStatement = databaseService.getConnection().prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_email = ?, acc_wachtwoord = ?, acc_straat = ?, acc_postcode = ?, acc_huisnr = ?, acc_woonplaats = ? WHERE acc_id = ? ");
+			createStatement = dbConnection.prepareStatement("INSERT INTO account(acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email, acc_wachtwoord, acc_straat, acc_postcode, acc_huisnr, acc_woonplaats ) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)");
+			getAccountByIdStatement = dbConnection.prepareStatement("SELECT * FROM account WHERE acc_id = ?");
+			selectAllAccountsStatement = dbConnection.prepareStatement("SELECT * FROM account");
+			getGebruikerZonderWachtwoord = dbConnection.prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email  FROM account WHERE acc_email = ?");
+			authenticateStatement = dbConnection.prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email FROM account WHERE acc_email = ? AND acc_wachtwoord = ?");
+			updateStatement = dbConnection.prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_email = ?, acc_wachtwoord = ?, acc_straat = ?, acc_postcode = ?, acc_huisnr = ?, acc_woonplaats = ? WHERE acc_id = ? ");
 		}
 		catch(SQLException e){
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
