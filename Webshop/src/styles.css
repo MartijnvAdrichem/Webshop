@@ -4,3 +4,10 @@
 @import "assets/css/font-awesome.min.css";
 @import "assets/css/lifestyle.min.css";
 @import "assets/css/google-font.css";
+body{
+  background: url("https://i.imgur.com/nRmugUR.jpg") no-repeat fixed;
+}
+@font-face {
+  font-family: AvengerFont;
+  src: url("AVENGEANCE HEROIC AVENGER.ttf");
+}

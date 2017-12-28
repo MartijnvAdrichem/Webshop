@@ -7,10 +7,12 @@ import {RouterModule, Routes} from "@angular/router";
 import {AccountComponent} from "./account/account.component";
 import {NgModule} from "@angular/core";
 import {AccountRegisterComponent} from "./account/account-register/account-register.component";
+import {ProductComponent} from "./product/product.component";
+import {ProductOverviewComponent} from "./product/product-overview/product-overview.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'account', pathMatch: "full"},
-  { path: 'login', component: LoginComponent},
+  { path: '', redirectTo: 'products/Stripboeken', pathMatch: "full"},
+  { path: 'products/:type', component: ProductOverviewComponent},
   { path: 'account/register', component: AccountRegisterComponent},
 ];
 

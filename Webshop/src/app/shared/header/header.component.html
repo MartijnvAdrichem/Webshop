@@ -6,11 +6,13 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="account">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
+      <li><a routerLink="products/Stripboeken">Stripboeken</a></li>
+      <li><a routerLink="products/Films">Films</a></li>
+      <li><a routerLink="products/Merchandise">Merchandise</a></li>
+      <li><a routerLink="products/T-shirts">T-shirts</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="account/register"><span class="glyphicon glyphicon-user"></span> Registreren</a></li>
+      <li *ngIf="isAuthenticated() == false"><a routerLink="account/register"><span class="glyphicon glyphicon-user"></span> Registreren</a></li>
       <li *ngIf="isAuthenticated() == false"><a data-toggle="collapse" data-target="#login"><span class="glyphicon glyphicon-log-in"></span>Inloggen</a></li>
       <li *ngIf="isAuthenticated() == true"><a data-toggle="collapse" data-target="#login"><span class="glyphicon glyphicon-log-in"></span>Mijn account</a></li>
     </ul>
