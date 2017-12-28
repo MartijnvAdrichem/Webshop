@@ -1,10 +1,4 @@
-.logo {
-  top: 15px;
-  right: 25px;
-  width: 250px;
-  position: absolute
-}
-
 #login{
-  margin:15px;
+  max-height: 300px;
+  max-width: 300px;
 }

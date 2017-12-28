@@ -13,7 +13,7 @@ import {NgModule} from "@angular/core";
 import {AppComponent} from "./app.component";
 import {HeaderComponent} from "./shared/header/header.component";
 import {LoginComponent} from "./auth/login/login.component";
-import {AccountCreateComponent} from "./account/account-create/account-create.component";
+import {AccountRegisterComponent} from "./account/account-register/account-register.component";
 import {AccountInzageComponent} from "./account/account-overview/account-overview.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -28,17 +28,22 @@ import {TokenInterceptor} from "./auth/token/token.interceptor";
 import {MessageService} from "./shared/message/message.service";
 import {MessageComponent} from "./shared/message/message.component";
 import {AccountComponent} from "./account/account.component";
+import { ProductComponent } from './product/product.component';
+import { ProductOverviewComponent } from './product/product-overview/product-overview.component';
+import {ProductService} from "./product/product.service";
 
 @NgModule({
   exports: [],
   declarations: [
     AppComponent,
     LoginComponent,
-    AccountCreateComponent,
+    AccountRegisterComponent,
     AccountInzageComponent,
     MessageComponent,
     AccountComponent,
     HeaderComponent,
+    ProductComponent,
+    ProductOverviewComponent,
   ],
   imports: [
     MatInputModule,
@@ -85,7 +90,7 @@ import {AccountComponent} from "./account/account.component";
     MatSnackBarModule,
     MatAutocompleteModule
   ],
-  providers: [AuthService, TokenService, AccountService, MessageService, {
+  providers: [AuthService, TokenService, AccountService, MessageService, ProductService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true

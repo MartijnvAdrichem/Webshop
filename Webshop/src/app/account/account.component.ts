@@ -18,32 +18,9 @@ export class AccountComponent implements OnInit {
 
   constructor(private authService: AuthService, private accountService:AccountService, private router:Router) { }
 
-  public checkIfAdmin(isadmin) : void{
-    if(isadmin == null){
-      return;
-    }
-    console.log(" ---> " +isadmin);
-    if(isadmin == true){
-      this.router.navigate(['account']);
-    } else {
-      this.authService.getAuthenticatedUser().subscribe(accountGegevens => {
-        this.accountService.selectedAccount = accountGegevens
-        this.router.navigate(['account/new']);
-      }, (err: any) => {
-        //do error handling
-      });
-    }
-  }
-
-  public checkCurrentAccount() : Account{
-    if(this.account == null){
-      return null;
-    }
-    return this.account;
-  }
 
   ngOnInit() {
-    this.checkIfAdmin(this.authService.isAdmin);
+
   }
 }
 

@@ -3,11 +3,11 @@ export class Account{
   firstname: string;
   prefix: string;
   lastname: string;
-  username: string;
+  eMail: string;
+  street:string;
+  houseNumber:string;
+  zipCode: string;
+  town:string;
   password: string;
-  password2: string;
-  isAdmin: boolean = false;
-  isActive: boolean = true;
-  inactiveProducts: boolean;
-  inactiveClients: boolean;
+  passwordRepeat: string;
 }

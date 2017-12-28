@@ -1,6 +1,8 @@
-.main-sidebar {
-  position: fixed !important;
+#login{
+  position: fixed;
+  z-index: 1;
+  top: 50px;
+  right: 30px;
 }
- .sidebar-menu:hover {
-   cursor:pointer
- }
+#header{
+}

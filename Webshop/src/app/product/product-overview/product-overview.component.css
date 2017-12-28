@@ -1,0 +1,17 @@
+#test{
+  border-radius: 5px;
+  width: 40%;
+  margin: 0px auto;
+  float: none;
+  background-color: white;
+}
+#title{
+  font-weight: bold;
+  text-align: center;
+  font-size: 6em;
+  color: black;
+  font-family: AvengerFont;
+}
+li {
+  list-style-type: none;
+}
