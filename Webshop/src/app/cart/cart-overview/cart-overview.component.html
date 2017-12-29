@@ -4,11 +4,12 @@
   <table id="table" class="table">
     <thead>
     <tr>
-      <th>Preview</th>
+      <th></th>
       <th>Product</th>
       <th>Prijs</th>
       <th>Aantal</th>
       <th>Totaalprijs</th>
+      <th></th>
     </tr>
     </thead>
     <tbody *ngFor="let cartRowProduct of productsInCart">
@@ -18,7 +19,9 @@
         <td>{{cartRowProduct.product.price}}</td>
         <td> {{cartRowProduct.amount}}</td>
         <td> {{cartRowProduct.product.price * cartRowProduct.amount}}</td>
+        <td> <button (click)="removeOfChart(cartRowProduct.product.id)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
       </tr>
     </tbody>
   </table>
+  <p id="totaal">totaal: {{getTotalPrice()}} <button><span>Bestelling afronden</span></button></p>
 </div>

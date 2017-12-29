@@ -67,8 +67,24 @@ export class CartService {
   }
 
 
-  removeOfChart(){
+  removeOfChart(prodid){
+    let cart:Cart;
+    cart = this.getCart();
 
+    if(cart == null){
+        return;
+    }
+
+    for(var i = 0; i < cart.producsInCart.length; i++){
+      console.log(cart.producsInCart[i].prodid + " boop " + prodid);
+      if(cart.producsInCart[i].prodid == prodid){
+          cart.producsInCart.splice(i, 1);
+          console.log(cart.producsInCart.length);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          this.calculateAmountinCart();
+          return;
+      }
+    }
   }
 
 

@@ -19,3 +19,8 @@
   color: black;
   font-family: AvengerFont;
 }
+#totaal{
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2em;
+}

@@ -12,7 +12,11 @@ export class ProductService {
     return this.http.get<Product[]>('api/product/list/' + filter);
   }
 
-  public getProductInformation(id):Observable<Product>  {
-    return this.http.get<Product>('api/product/' + id);
+  public getProductInformation(ids):Observable<Product[]>  {
+      let idString = "";
+      for(let i = 0; i < ids.length; i++){
+        idString += ids[i] + "-";
+      }
+    return this.http.get<Product[]>('api/product/'  + idString);
   }
 }

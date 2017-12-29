@@ -17,21 +17,42 @@ export class CartOverviewComponent implements OnInit {
 
   constructor(private cartService:CartService, private productService:ProductService) { }
 
-  ngOnInit() {
-    this.cart = this.cartService.getCart();
-      console.log(this.cart);
-      console.log(this.cart.producsInCart[0].amount);
-    for(var i = 0; i < this.cart.producsInCart.length; i++){
 
-      let cartRowProduct:CartRowProduct = new CartRowProduct();
-      cartRowProduct.amount = this.cart.producsInCart[i].amount;
-
-        this.productService.getProductInformation(this.cart.producsInCart[i].prodid).subscribe(data => {
-          cartRowProduct.product = data;
-          this.productsInCart.push(cartRowProduct);
-        });
+  removeOfChart(prodid) {
+    this.cartService.removeOfChart(prodid);
+    for(var i = 0; i < this.productsInCart.length; i++){
+      if(this.productsInCart[i].product.id == prodid){
+        this.productsInCart.splice(i, 1);
+        return;
       }
     }
+  }
 
+  getTotalPrice():number {
+    let totalprice =  0;
+    for(var i = 0; i < this.productsInCart.length; i++){
+        totalprice += this.productsInCart[i].product.price * this.productsInCart[i].amount;
+      }
+    return totalprice;
+  }
 
+  ngOnInit() {
+    this.cart = this.cartService.getCart();
+
+      let ids:number[] = new Array();
+      for(let i = 0; i < this.cart.producsInCart.length; i++){
+       ids.push(this.cart.producsInCart[i].prodid);
+      }
+
+        this.productService.getProductInformation(ids).subscribe(data => {
+          console.log(data);
+          for(let i = 0; i < data.length; i++){
+            let cartRowProduct = new CartRowProduct();
+            cartRowProduct.product = data[i];
+            cartRowProduct.amount = this.cart.producsInCart[i].amount;
+            this.productsInCart.push(cartRowProduct);
+          }
+        });
+      }
 }
+
