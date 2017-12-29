@@ -38,8 +38,11 @@ public class ProductService {
 				break;
 		}
 
-
-
 		return productDAO.getProductsByType(enumType);
 	}
+
+	public Product getProductsInformation(int prodid) {
+		return productDAO.getProductsInformation(prodid);
+	}
+
 }

@@ -37,4 +37,13 @@ public class ProductResource {
 		return productService.getProductsByType(type);
 	}
 
+	@GET
+	@Path("/{id]")
+	@JsonView(View.Public.class)
+	public Product getProductInformation(@PathParam("id") int id) {
+
+		return productService.getProductsInformation(id);
+	}
+
+
 }

@@ -12,4 +12,7 @@ export class ProductService {
     return this.http.get<Product[]>('api/product/list/' + filter);
   }
 
+  public getProductInformation(id):Observable<Product>  {
+    return this.http.get<Product>('api/product/' + id);
+  }
 }

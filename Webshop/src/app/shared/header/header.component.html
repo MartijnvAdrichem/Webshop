@@ -12,7 +12,7 @@
       <li><a routerLink="products/T-shirts">T-shirts</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="account/register"><span class="glyphicon glyphicon-shopping-cart"></span> Mijn winkelmandje ( {{cartService.amountInCart}} )</a></li>
+      <li><a routerLink="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Mijn winkelmandje ( {{cartService.amountInCart}} )</a></li>
       <li *ngIf="isAuthenticated() == false"><a routerLink="account/register"><span class="glyphicon glyphicon-user"></span> Registreren</a></li>
       <li *ngIf="isAuthenticated() == false"><a data-toggle="collapse" data-target="#login"><span class="glyphicon glyphicon-log-in"></span> Inloggen</a></li>
       <li *ngIf="isAuthenticated() == true"><a data-toggle="collapse" data-target="#login"><span class="glyphicon glyphicon-log-in"></span> Mijn account</a></li>

@@ -15,25 +15,27 @@ export class CartService {
 
 
   addToChart(product:Product, amount:number){
-    console.log("Running!")
     let cart:Cart;
-    cart = JSON.parse(localStorage.getItem('cart'));
+    cart = this.getCart();
+
+    //Check if the user has an cart, if not we initialize a new one
     if(cart == null){
-      console.log("null");
       cart = new Cart();
       cart.producsInCart = [];
     }
     var productExists = false;
 
     for(var i = 0; i < cart.producsInCart.length; i++){
-      if(cart.producsInCart[0].product.id == product.id){
+      if(cart.producsInCart[i].prodid == product.id){
         productExists = true;
-        cart.producsInCart[0].amount += amount;
+        cart.producsInCart[i].amount += amount;
       }
     }
+    //Product does not exists in the list yet, so we add it as a new row
     if(!productExists){
       var cartRow = new CartRow();
-      cartRow.product = product;
+      //We only save the prod id, because thats all we need.
+      cartRow.prodid = product.id;
       cartRow.amount = amount;
       cart.producsInCart.push(cartRow)
     }
@@ -45,9 +47,10 @@ export class CartService {
 
   calculateAmountinCart() {
     let cart:Cart;
-    cart = JSON.parse(localStorage.getItem('cart'));
+    cart = this.getCart();
     if(cart == null){
       this.amountInCart = 0;
+      return;
     }
     let amount = 0;
     for(var i = 0; i < cart.producsInCart.length; i++){
@@ -58,6 +61,10 @@ export class CartService {
 
     }
 
+
+  getCart() : Cart {
+    return JSON.parse(localStorage.getItem('cart'));
+  }
 
 
   removeOfChart(){

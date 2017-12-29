@@ -33,6 +33,7 @@ import { ProductOverviewComponent } from './product/product-overview/product-ove
 import {ProductService} from "./product/product.service";
 import { CartComponent } from './cart/cart.component';
 import {CartService} from "./cart/cart.service";
+import { CartOverviewComponent } from './cart/cart-overview/cart-overview.component';
 
 @NgModule({
   exports: [],
@@ -47,6 +48,7 @@ import {CartService} from "./cart/cart.service";
     ProductComponent,
     ProductOverviewComponent,
     CartComponent,
+    CartOverviewComponent,
   ],
   imports: [
     MatInputModule,

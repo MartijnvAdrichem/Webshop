@@ -1,0 +1,24 @@
+<div id="centered">
+  <h1 id="title">Winkelmandje</h1>
+  <p *ngIf="">uw winkelmandje is nog leeg!</p>
+  <table id="table" class="table">
+    <thead>
+    <tr>
+      <th>Preview</th>
+      <th>Product</th>
+      <th>Prijs</th>
+      <th>Aantal</th>
+      <th>Totaalprijs</th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let cartRowProduct of productsInCart">
+      <tr>
+        <td><img id="product-img" src={{cartRowProduct.product.imageURL}}></td>
+        <td>{{cartRowProduct.product.name}}</td>
+        <td>{{cartRowProduct.product.price}}</td>
+        <td> {{cartRowProduct.amount}}</td>
+        <td> {{cartRowProduct.product.price * cartRowProduct.amount}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

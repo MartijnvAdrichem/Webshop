@@ -1,8 +1,8 @@
 import {Product} from "../product/product";
 
-export class CartRow {
+export class CartRowProduct {
 
-  prodid:number;
+  product:Product;
   amount:number;
 
 }
