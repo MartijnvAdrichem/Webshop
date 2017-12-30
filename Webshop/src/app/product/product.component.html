@@ -9,8 +9,8 @@
 
       <div class="row bottom">
         <div class="col-md-8"><p id="prijs">prijs: {{product.price}}</p></div>
-        <div class="col-md-2"><input id="inputamount" type="number" value="1"></div>
-        <div class="col-md-2"><button mat-raised-button><span>toevoegen</span></button></div>
+        <div class="col-md-2"><input id="inputamount" type="number" [(ngModel)] = "amount"></div>
+        <div class="col-md-2"><button mat-raised-button (click)="addProductToCart()"><span>toevoegen</span></button></div>
       </div>
     </div>
   </div>

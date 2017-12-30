@@ -16,6 +16,7 @@ public class ProductDAO {
 
 
 	private PreparedStatement getProductsbyTypeStatement;
+	private PreparedStatement getProductsInformationStatement;
 
 	public Connection dbConnection;
 
@@ -29,6 +30,7 @@ public class ProductDAO {
 	private void prepareStatements() {
 		try {
 			getProductsbyTypeStatement = dbConnection.prepareStatement("SELECT * FROM PRODUCT WHERE prod_type = CAST(? AS producttype)");
+			getProductsInformationStatement = dbConnection.prepareStatement("SELECT * FROM PRODUCT WHERE prod_id = ?");
 		} catch (SQLException e) {
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
 		}
@@ -57,6 +59,34 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public Product getProductsInformation(int prodid){
+			try {
+				getProductsInformationStatement.setInt(1, prodid);
+			ResultSet resultSet = getProductsInformationStatement.executeQuery();
+			if (resultSet.next()){
+				System.out.println("Making product");
+				Product product = makeProduct(resultSet);
+				return product;
+			}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	public Product makeProduct(ResultSet resultSet) throws SQLException{
+
+		Product product = new Product();
+		product.setId(resultSet.getInt("prod_id"));
+		product.setDescription(resultSet.getString("prod_beschrijving"));
+		product.setName(resultSet.getString("prod_naam"));
+		product.setImageURL(resultSet.getString("prod_image"));
+		product.setType(resultSet.getString("prod_type"));
+		product.setPrice(resultSet.getDouble("prod_prijs"));
+		return product;
 	}
 
 

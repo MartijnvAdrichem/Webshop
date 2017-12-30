@@ -9,11 +9,14 @@ import {NgModule} from "@angular/core";
 import {AccountRegisterComponent} from "./account/account-register/account-register.component";
 import {ProductComponent} from "./product/product.component";
 import {ProductOverviewComponent} from "./product/product-overview/product-overview.component";
+import {CartOverviewComponent} from "./cart/cart-overview/cart-overview.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'products/Stripboeken', pathMatch: "full"},
   { path: 'products/:type', component: ProductOverviewComponent},
   { path: 'account/register', component: AccountRegisterComponent},
+  { path: 'cart', component: CartOverviewComponent},
+
 ];
 
 @NgModule({

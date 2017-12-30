@@ -1,0 +1,27 @@
+<div id="centered">
+  <h1 id="title">Winkelmandje</h1>
+  <p *ngIf="">uw winkelmandje is nog leeg!</p>
+  <table id="table" class="table">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Product</th>
+      <th>Prijs</th>
+      <th>Aantal</th>
+      <th>Totaalprijs</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody *ngFor="let cartRowProduct of productsInCart">
+      <tr>
+        <td><img id="product-img" src={{cartRowProduct.product.imageURL}}></td>
+        <td>{{cartRowProduct.product.name}}</td>
+        <td>{{cartRowProduct.product.price}}</td>
+        <td> {{cartRowProduct.amount}}</td>
+        <td> {{cartRowProduct.product.price * cartRowProduct.amount}}</td>
+        <td> <button (click)="removeOfChart(cartRowProduct.product.id)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
+      </tr>
+    </tbody>
+  </table>
+  <p id="totaal">totaal: {{getTotalPrice()}} <button><span>Bestelling afronden</span></button></p>
+</div>

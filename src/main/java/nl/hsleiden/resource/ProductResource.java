@@ -37,4 +37,18 @@ public class ProductResource {
 		return productService.getProductsByType(type);
 	}
 
+	@GET
+	@Path("/{ids}")
+	@JsonView(View.Public.class)
+	public ArrayList<Product> getProductInformation(@PathParam("ids") String idString) {
+		System.out.println(idString);
+		String[] productIds = idString.split("-");
+		ArrayList<Product> products = new ArrayList<>();
+		for (int i = 0; i < productIds.length; i++) {
+			products.add(productService.getProductsInformation(Integer.parseInt(productIds[i])));
+		}
+		return products;
+	}
+
+
 }
