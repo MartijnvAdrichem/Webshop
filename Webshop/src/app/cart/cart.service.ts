@@ -23,8 +23,8 @@ export class CartService {
       cart = new Cart();
       cart.producsInCart = [];
     }
-    var productExists = false;
 
+    var productExists = false;
     for(var i = 0; i < cart.producsInCart.length; i++){
       if(cart.producsInCart[i].prodid == product.id){
         productExists = true;
@@ -61,11 +61,9 @@ export class CartService {
 
     }
 
-
   getCart() : Cart {
     return JSON.parse(localStorage.getItem('cart'));
   }
-
 
   removeOfChart(prodid){
     let cart:Cart;
@@ -76,12 +74,14 @@ export class CartService {
     }
 
     for(var i = 0; i < cart.producsInCart.length; i++){
-      console.log(cart.producsInCart[i].prodid + " boop " + prodid);
+
       if(cart.producsInCart[i].prodid == prodid){
+
           cart.producsInCart.splice(i, 1);
-          console.log(cart.producsInCart.length);
           localStorage.setItem('cart', JSON.stringify(cart));
+
           this.calculateAmountinCart();
+
           return;
       }
     }

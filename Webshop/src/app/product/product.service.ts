@@ -13,6 +13,8 @@ export class ProductService {
   }
 
   public getProductInformation(ids):Observable<Product[]>  {
+     //Make a string of the product ids so we can send it to the API
+    // This is because you can't directly send an arralylist in a get request.
       let idString = "";
       for(let i = 0; i < ids.length; i++){
         idString += ids[i] + "-";

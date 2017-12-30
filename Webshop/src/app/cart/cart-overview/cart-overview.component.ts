@@ -36,23 +36,27 @@ export class CartOverviewComponent implements OnInit {
     return totalprice;
   }
 
+  getcartData() {
+    let ids:number[] = new Array();
+    for(let i = 0; i < this.cart.producsInCart.length; i++){
+      ids.push(this.cart.producsInCart[i].prodid);
+    }
+
+    this.productService.getProductInformation(ids).subscribe(data => {
+      console.log(data);
+      for(let i = 0; i < data.length; i++){
+        let cartRowProduct = new CartRowProduct();
+        cartRowProduct.product = data[i];
+        cartRowProduct.amount = this.cart.producsInCart[i].amount;
+        this.productsInCart.push(cartRowProduct);
+      }
+    });
+  }
+
   ngOnInit() {
     this.cart = this.cartService.getCart();
+    this.getcartData();
+  }
 
-      let ids:number[] = new Array();
-      for(let i = 0; i < this.cart.producsInCart.length; i++){
-       ids.push(this.cart.producsInCart[i].prodid);
-      }
-
-        this.productService.getProductInformation(ids).subscribe(data => {
-          console.log(data);
-          for(let i = 0; i < data.length; i++){
-            let cartRowProduct = new CartRowProduct();
-            cartRowProduct.product = data[i];
-            cartRowProduct.amount = this.cart.producsInCart[i].amount;
-            this.productsInCart.push(cartRowProduct);
-          }
-        });
-      }
 }
 

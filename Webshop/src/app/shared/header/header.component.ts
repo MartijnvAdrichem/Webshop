@@ -11,7 +11,7 @@ import {CartService} from "../../cart/cart.service";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private router:Router, private authService:AuthService, private cartService:CartService) { }
+  constructor(private router:Router, private authService:AuthService, public cartService:CartService) { }
 
   public logout() {
     this.authService.logout();
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['account']);
   }
 
-  private isAuthenticated() {
+  public isAuthenticated() {
     return this.authService.isAuthenticated();
   }
 
