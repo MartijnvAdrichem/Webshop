@@ -36,7 +36,6 @@ import {CartService} from "./cart/cart.service";
 import { CartOverviewComponent } from './cart/cart-overview/cart-overview.component';
 import { OrderComponent } from './order/order.component';
 import { CartPaymentComponent } from './cart/cart-payment/cart-payment.component';
-import { CartPaymentFinishComponent } from './cart/cart-payment-finish/cart-payment-finish.component';
 
 @NgModule({
   exports: [],
@@ -54,7 +53,6 @@ import { CartPaymentFinishComponent } from './cart/cart-payment-finish/cart-paym
     CartOverviewComponent,
     OrderComponent,
     CartPaymentComponent,
-    CartPaymentFinishComponent,
   ],
   imports: [
     MatInputModule,
