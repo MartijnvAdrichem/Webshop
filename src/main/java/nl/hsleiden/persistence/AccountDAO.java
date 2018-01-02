@@ -35,7 +35,7 @@ public class AccountDAO {
 			createStatement = dbConnection.prepareStatement("INSERT INTO account(acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email, acc_wachtwoord, acc_straat, acc_postcode, acc_huisnr, acc_woonplaats ) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)");
 			getAccountByIdStatement = dbConnection.prepareStatement("SELECT * FROM account WHERE acc_id = ?");
 			selectAllAccountsStatement = dbConnection.prepareStatement("SELECT * FROM account");
-			getGebruikerZonderWachtwoord = dbConnection.prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email  FROM account WHERE acc_email = ?");
+			getGebruikerZonderWachtwoord = dbConnection.prepareStatement("SELECT * FROM account WHERE acc_email = ?");
 			authenticateStatement = dbConnection.prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email FROM account WHERE acc_email = ? AND acc_wachtwoord = ?");
 			updateStatement = dbConnection.prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_email = ?, acc_wachtwoord = ?, acc_straat = ?, acc_postcode = ?, acc_huisnr = ?, acc_woonplaats = ? WHERE acc_id = ? ");
 		}
@@ -101,6 +101,11 @@ public class AccountDAO {
 			account.setFirstname(resultSet.getString("acc_voornaam"));
 			account.setPrefix(resultSet.getString("acc_tussenvoegsel"));
 			account.setLastname(resultSet.getString("acc_achternaam"));
+			account.seteMail(resultSet.getString("acc_email"));
+			account.setStreet(resultSet.getString("acc_straat"));
+			account.setZipCode(resultSet.getString("acc_postcode"));
+			account.setHouseNumber(resultSet.getString("acc_huisnr"));
+			account.setTown(resultSet.getString("acc_woonplaats"));
 			account.setId(resultSet.getInt("acc_id"));
 
 			return account;
@@ -152,6 +157,11 @@ public class AccountDAO {
 			account.setFirstname(resultSet.getString("acc_voornaam"));
 			account.setPrefix(resultSet.getString("acc_tussenvoegsel"));
 			account.setLastname(resultSet.getString("acc_achternaam"));
+			account.seteMail(resultSet.getString("acc_email"));
+			account.setStreet(resultSet.getString("acc_straat"));
+			account.setZipCode(resultSet.getString("acc_postcode"));
+			account.setHouseNumber(resultSet.getString("acc_huisnr"));
+			account.setTown(resultSet.getString("acc_woonplaats"));
 			account.setId(resultSet.getInt("acc_id"));
 			return account;
 

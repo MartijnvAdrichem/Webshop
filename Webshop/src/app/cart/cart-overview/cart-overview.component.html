@@ -12,16 +12,16 @@
       <th></th>
     </tr>
     </thead>
-    <tbody *ngFor="let cartRowProduct of productsInCart">
+    <tbody *ngFor="let cartRowProduct of cart.productsInCart">
       <tr>
         <td><img id="product-img" src={{cartRowProduct.product.imageURL}}></td>
         <td>{{cartRowProduct.product.name}}</td>
-        <td>{{cartRowProduct.product.price}}</td>
+        <td>{{cartRowProduct.product.price | currency:'EUR':true:'1.2-2'}}</td>
         <td> {{cartRowProduct.amount}}</td>
-        <td> {{cartRowProduct.product.price * cartRowProduct.amount}}</td>
-        <td> <button (click)="removeOfChart(cartRowProduct.product.id)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
+        <td> {{cartRowProduct.product.price * cartRowProduct.amount | currency:'EUR':true:'1.2-2'}}</td>
+        <td> <button (click)="removeOfCart(cartRowProduct.product.id)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
       </tr>
     </tbody>
   </table>
-  <p id="totaal">totaal: {{getTotalPrice()}} <button><span>Bestelling afronden</span></button></p>
+  <p id="totaal">totaal: {{cart.getTotalPrice() | currency:'EUR':true:'1.2-2'}} <button routerLink="payment"><span>Bestelling afronden</span></button></p>
 </div>

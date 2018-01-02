@@ -5,6 +5,7 @@ import {Credentials} from "../credentials";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TokenService} from "../token/token.service";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, public  snackBar: MatSnackBar, private tokenService: TokenService, private router:Router) {}
+  constructor(private location: Location, private authService: AuthService, public  snackBar: MatSnackBar, private tokenService: TokenService, private router:Router) {}
   credentials: Credentials = new Credentials();
 
   public login(): void {
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(body).subscribe(data => {
         let token = data['token'];
         this.tokenService.setToken(token);
-        this.router.navigate(['account']);
+        this.location.back();
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 403) {

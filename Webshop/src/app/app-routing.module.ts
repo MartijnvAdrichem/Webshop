@@ -10,13 +10,15 @@ import {AccountRegisterComponent} from "./account/account-register/account-regis
 import {ProductComponent} from "./product/product.component";
 import {ProductOverviewComponent} from "./product/product-overview/product-overview.component";
 import {CartOverviewComponent} from "./cart/cart-overview/cart-overview.component";
+import {CartPaymentComponent} from "./cart/cart-payment/cart-payment.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'products/Stripboeken', pathMatch: "full"},
+  { path: 'login', component: LoginComponent},
   { path: 'products/:type', component: ProductOverviewComponent},
   { path: 'account/register', component: AccountRegisterComponent},
   { path: 'cart', component: CartOverviewComponent},
-
+  { path: 'cart/payment', component:CartPaymentComponent, canActivate: [AuthGuardService]},
 ];
 
 @NgModule({
