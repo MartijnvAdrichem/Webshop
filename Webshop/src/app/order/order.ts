@@ -1,8 +1,9 @@
 import {CartRowProduct} from "../cart/cart-row-product";
-
+import {Account} from "../account/account";
 export class Order {
 
-  account:Account;
+  id:number;
+  accountid:number;
   paymentBank: String;
   delivery: String;
 

@@ -13,7 +13,7 @@
       </div>
       <div class="col-md-4">
         <h2>Bezorgservice</h2>
-        <mat-radio-group class="radio-group">
+        <mat-radio-group [(ngModel)] = "order.delivery" class="radio-group">
           <mat-radio-button value="DHL">DHL</mat-radio-button>
           <mat-radio-button value="PostNL">PostNL</mat-radio-button>
         </mat-radio-group>
@@ -21,7 +21,7 @@
       </div>
       <div class="col-md-4">
         <h2>Betaalmethode</h2>
-        <mat-select placeholder="selecteer bank">
+        <mat-select [(ngModel)] = "order.paymentBank" placeholder="selecteer bank">
         <mat-option *ngFor="let payment of payments" [value]="payment.value">
           {{ payment.viewValue }}
         </mat-option>
@@ -50,7 +50,7 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
-      <button routerLink="payment"><span>Bestelling afronden</span></button>
+      <button (click)="finishPayment()"><span>Bestelling afronden</span></button>
     </div>
   </div>
 </mat-card>

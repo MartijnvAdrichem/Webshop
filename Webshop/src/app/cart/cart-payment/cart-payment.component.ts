@@ -5,6 +5,8 @@ import {Product} from "../../product/product";
 import {Cart} from "../cart";
 import {CartService} from "../cart.service";
 import {Router} from "@angular/router";
+import {Order} from "../../order/order";
+import {OrderService} from "../../order/order.service";
 
 @Component({
   selector: 'app-cart-payment',
@@ -29,6 +31,7 @@ export class CartPaymentComponent implements OnInit {
 
   account:Account = new Account();
   cart:Cart = new Cart();
+  order:Order = new Order();
 
   getVerzendKosten() {
     if(this.cart.getTotalPrice() < 20){
@@ -38,11 +41,17 @@ export class CartPaymentComponent implements OnInit {
     }
   }
 
+  finishPayment() {
+    this.order.accountid = this.account.id;
+    this.order.orderRows = this.cart.productsInCart;
+    this.orderSerivce.createOrder(this.order);
+  }
+
   public cancelPayment(){
     this.router.navigate(['cart'])
   }
 
-  constructor(private router:Router, private authService:AuthService, private cartService:CartService) { }
+  constructor(private router:Router,private orderSerivce:OrderService, private authService:AuthService, private cartService:CartService) { }
 
   ngOnInit() {
     this.cart = this.cartService.getCart();

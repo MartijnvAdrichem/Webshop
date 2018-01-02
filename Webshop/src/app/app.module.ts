@@ -36,6 +36,7 @@ import {CartService} from "./cart/cart.service";
 import { CartOverviewComponent } from './cart/cart-overview/cart-overview.component';
 import { OrderComponent } from './order/order.component';
 import { CartPaymentComponent } from './cart/cart-payment/cart-payment.component';
+import {OrderService} from "./order/order.service";
 
 @NgModule({
   exports: [],
@@ -99,7 +100,7 @@ import { CartPaymentComponent } from './cart/cart-payment/cart-payment.component
     MatSnackBarModule,
     MatAutocompleteModule
   ],
-  providers: [AuthService, TokenService, AccountService, MessageService, ProductService, CartService, {
+  providers: [AuthService, TokenService, AccountService, MessageService, ProductService, CartService, OrderService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
