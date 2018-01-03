@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CartRowProduct {
 
-	CartRowProduct() {
+	public CartRowProduct() {
 
 	}
 

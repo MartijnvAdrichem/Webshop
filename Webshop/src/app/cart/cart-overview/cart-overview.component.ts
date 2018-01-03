@@ -18,11 +18,22 @@ export class CartOverviewComponent implements OnInit {
 
 
   removeOfCart(prodid) {
-    this.cartService.removeOfChart(prodid);
+    this.cartService.removeOfCart(prodid);
     this.cart = this.cartService.getCart();
   }
 
-
+  isCartEmpty():boolean {
+    if(this.cart == null){
+      return true;
+    }
+    if(this.cart.productsInCart == null){
+      return true;
+    }
+    if(this.cart.productsInCart.length == 0){
+      return true;
+    }
+    return false;
+  }
 
   ngOnInit() {
     this.cart = this.cartService.getCart();

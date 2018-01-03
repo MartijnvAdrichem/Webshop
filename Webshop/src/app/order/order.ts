@@ -1,6 +1,10 @@
 import {CartRowProduct} from "../cart/cart-row-product";
-import {Account} from "../account/account";
+
 export class Order {
+
+  constructor() {
+
+  }
 
   id:number;
   accountid:number;

@@ -1,6 +1,6 @@
 #centered{
   border-radius: 5px;
-  width: 40%;
+  width: 50%;
   margin: 0px auto;
   float: none;
   background-color: white;
@@ -14,9 +14,4 @@
 }
 li {
   list-style-type: none;
-}
-#emptymessage{
-  font-weight: bold;
-  text-align: center;
-  color: black;
 }

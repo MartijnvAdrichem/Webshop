@@ -16,7 +16,7 @@ export class CartService {
   }
 
 
-  addToChart(product:Product, amount:number){
+  addToCart(product:Product, amount:number){
     let productsInCart:CartRow[];
     productsInCart = JSON.parse(localStorage.getItem('cart'));
 
@@ -75,6 +75,10 @@ export class CartService {
     cart.productsInCart = [];
     productsInCart = JSON.parse(localStorage.getItem('cart'));
 
+    if(productsInCart == null){
+      return;
+    }
+
     for(let i = 0; i < productsInCart.length; i++){
       ids.push(productsInCart[i].prodid);
     }
@@ -91,7 +95,12 @@ export class CartService {
     return cart;
   }
 
-  removeOfChart(prodid){
+  deleteCart() {
+    localStorage.removeItem('cart');
+    this.calculateAmountinCart();
+  }
+
+  removeOfCart(prodid){
     let productsInCart:CartRow[];
     productsInCart = JSON.parse(localStorage.getItem('cart'));
 

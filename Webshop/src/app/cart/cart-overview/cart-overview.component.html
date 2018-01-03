@@ -1,6 +1,7 @@
 <div id="centered">
   <h1 id="title">Winkelmandje</h1>
-  <p *ngIf="">uw winkelmandje is nog leeg!</p>
+  <p id="emptymessage" *ngIf="isCartEmpty()">uw winkelmandje is nog leeg!</p>
+ <div *ngIf="!isCartEmpty()">
   <table id="table" class="table">
     <thead>
     <tr>
@@ -23,5 +24,8 @@
       </tr>
     </tbody>
   </table>
-  <p id="totaal">totaal: {{cart.getTotalPrice() | currency:'EUR':true:'1.2-2'}} <button routerLink="payment"><span>Bestelling afronden</span></button></p>
+     <p id="totaal">totaal: {{cart.getTotalPrice() | currency:'EUR':true:'1.2-2'}}</p>
+    <button id = "cart" mat-raised-button color="warn" routerLink="payment"><span>Bestelling afronden</span></button>
+  <br>
+ </div>
 </div>

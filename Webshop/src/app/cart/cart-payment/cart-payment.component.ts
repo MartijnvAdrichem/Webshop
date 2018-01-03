@@ -7,6 +7,7 @@ import {CartService} from "../cart.service";
 import {Router} from "@angular/router";
 import {Order} from "../../order/order";
 import {OrderService} from "../../order/order.service";
+import {MessageService} from "../../shared/message/message.service";
 
 @Component({
   selector: 'app-cart-payment',
@@ -42,7 +43,14 @@ export class CartPaymentComponent implements OnInit {
   }
 
   finishPayment() {
-    this.order.accountid = this.account.id;
+    if(this.order.delivery == null){
+      this.messageService.notificationFailed.next("U moet nog een bezorgdienst selecteren...");
+      return;
+    }
+    if(this.order.paymentBank == null){
+      this.messageService.notificationFailed.next("U heeft nog geen bank geselectereerd...");
+      return;
+    }
     this.order.orderRows = this.cart.productsInCart;
     this.orderSerivce.createOrder(this.order);
   }
@@ -51,7 +59,7 @@ export class CartPaymentComponent implements OnInit {
     this.router.navigate(['cart'])
   }
 
-  constructor(private router:Router,private orderSerivce:OrderService, private authService:AuthService, private cartService:CartService) { }
+  constructor(private messageService:MessageService, private router:Router,private orderSerivce:OrderService, private authService:AuthService, private cartService:CartService) { }
 
   ngOnInit() {
     this.cart = this.cartService.getCart();
