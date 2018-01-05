@@ -13,49 +13,30 @@ import {Product} from "../../product/product";
 export class CartOverviewComponent implements OnInit {
 
   cart:Cart;
-  productsInCart:CartRowProduct[] = new Array();
 
   constructor(private cartService:CartService, private productService:ProductService) { }
 
 
-  removeOfChart(prodid) {
-    this.cartService.removeOfChart(prodid);
-    for(var i = 0; i < this.productsInCart.length; i++){
-      if(this.productsInCart[i].product.id == prodid){
-        this.productsInCart.splice(i, 1);
-        return;
-      }
-    }
+  removeOfCart(prodid) {
+    this.cartService.removeOfCart(prodid);
+    this.cart = this.cartService.getCart();
   }
 
-  getTotalPrice():number {
-    let totalprice =  0;
-    for(var i = 0; i < this.productsInCart.length; i++){
-        totalprice += this.productsInCart[i].product.price * this.productsInCart[i].amount;
-      }
-    return totalprice;
-  }
-
-  getcartData() {
-    let ids:number[] = new Array();
-    for(let i = 0; i < this.cart.producsInCart.length; i++){
-      ids.push(this.cart.producsInCart[i].prodid);
+  isCartEmpty():boolean {
+    if(this.cart == null){
+      return true;
     }
-
-    this.productService.getProductInformation(ids).subscribe(data => {
-      console.log(data);
-      for(let i = 0; i < data.length; i++){
-        let cartRowProduct = new CartRowProduct();
-        cartRowProduct.product = data[i];
-        cartRowProduct.amount = this.cart.producsInCart[i].amount;
-        this.productsInCart.push(cartRowProduct);
-      }
-    });
+    if(this.cart.productsInCart == null){
+      return true;
+    }
+    if(this.cart.productsInCart.length == 0){
+      return true;
+    }
+    return false;
   }
 
   ngOnInit() {
     this.cart = this.cartService.getCart();
-    this.getcartData();
   }
 
 }

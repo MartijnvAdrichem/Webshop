@@ -1,0 +1,56 @@
+<mat-card id="marginborder" class="row">
+  <div class="row">
+    <mat-card>
+    <div class="row">
+      <div class="col-md-4">
+        <h2>E-mailadres</h2>
+        <p>{{account.eMail}}</p>
+        <h2>Bezorgadres</h2>
+        <p>{{account.firstname}} {{account.prefix}} {{account.lastname}}</p>
+        <p>{{account.street}} {{account.houseNumber}}</p>
+        <p>{{account.zipCode}} {{account.town}}</p>
+        <p>Nederland</p>
+      </div>
+      <div class="col-md-4">
+        <h2>Bezorgservice</h2>
+        <mat-radio-group [(ngModel)] = "order.delivery" class="radio-group">
+          <mat-radio-button value="DHL">DHL</mat-radio-button>
+          <mat-radio-button value="PostNL">PostNL</mat-radio-button>
+        </mat-radio-group>
+
+      </div>
+      <div class="col-md-4">
+        <h2>Kies een bank</h2>
+        <mat-select [(ngModel)] = "order.paymentBank" placeholder="selecteer bank">
+        <mat-option *ngFor="let payment of payments" [value]="payment.value">
+          {{ payment.viewValue }}
+        </mat-option>
+        </mat-select>
+      </div>
+    </div>
+    </mat-card>
+  </div>
+
+  <div class="payment" class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+      <p>Subtotaal: {{cart.getTotalPrice() | currency:'EUR':true:'1.2-2'}}</p>
+      <p *ngIf="getVerzendKosten()==0">Verzendkosten: <span class="glyphicon glyphicon-ok"> </span>  Verzending is gratis </p>
+      <p *ngIf="getVerzendKosten()!=0">Verzendkosten: {{getVerzendKosten()}}</p>
+      <h2>Totaalprijs: {{(cart.getTotalPrice() + getVerzendKosten()) | currency:'EUR':true:'1.2-2'}}</h2>
+    </div>
+  </div>
+  <div class="payment" class="row">
+    <div class="col-md-4">
+      <button mat-raised-button color="warn" (click)="cancelPayment()"><span>Annuleren</span></button>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+      <button mat-raised-button color="warn" (click)="finishPayment()"><span>Bestelling afronden</span></button>
+    </div>
+  </div>
+</mat-card>

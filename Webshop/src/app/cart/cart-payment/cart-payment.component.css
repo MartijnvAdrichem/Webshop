@@ -1,0 +1,10 @@
+#marginborder{
+  margin: 5%;
+}
+.radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+.payment{
+  margin-top: 1em;
+}

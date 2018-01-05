@@ -49,12 +49,6 @@ export class AccountService {
     return this.http.get<Account[]>('api/account/all')
   }
 
-  getAccountForTransfer(): Observable<Account[]> {
-    return this.http.get<Account[]>('api/account/transfer/all')
-  }
-  public goAccountOverview() {
-    this.router.navigate(['/account']);
-  }
 
 
 }

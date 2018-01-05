@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 
-public class Account implements Principal{
+public class Account implements Principal {
 
 	@JsonProperty
 	int id;
@@ -159,7 +159,6 @@ public class Account implements Principal{
 	public void setTown(String town) {
 		this.town = town;
 	}
-
 
 	@Override
 	public String getName() {

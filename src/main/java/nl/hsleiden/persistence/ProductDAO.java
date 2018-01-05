@@ -1,6 +1,8 @@
 package nl.hsleiden.persistence;
 
 import com.google.inject.Inject;
+import nl.hsleiden.model.CartRowProduct;
+import nl.hsleiden.model.Order;
 import nl.hsleiden.model.Product;
 import nl.hsleiden.service.DatabaseService;
 
@@ -29,8 +31,8 @@ public class ProductDAO {
 
 	private void prepareStatements() {
 		try {
-			getProductsbyTypeStatement = dbConnection.prepareStatement("SELECT * FROM PRODUCT WHERE prod_type = CAST(? AS producttype)");
-			getProductsInformationStatement = dbConnection.prepareStatement("SELECT * FROM PRODUCT WHERE prod_id = ?");
+			getProductsbyTypeStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_type = CAST(? AS producttype)");
+			getProductsInformationStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_id = ?");
 		} catch (SQLException e) {
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
 		}
@@ -90,4 +92,12 @@ public class ProductDAO {
 	}
 
 
+	public Order fillOrderWithProducts(Order order){
+
+		for (int i = 0; i < order.getOrderRows().size() ; i++) {
+			Product newProduct = getProductsInformation(order.getOrderRows().get(i).getProduct().getId());
+			order.getOrderRows().get(i).setProduct(newProduct);
+		}
+		return order;
+	}
 }

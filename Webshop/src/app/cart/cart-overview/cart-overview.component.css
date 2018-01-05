@@ -6,10 +6,6 @@
   background-color: white;
 }
 #centered{
-  border-radius: 5px;
-  width: 40%;
-  margin: 0px auto;
-  float: none;
   background-color: white;
 }
 #title{
@@ -23,4 +19,19 @@
   font-weight: bold;
   text-align: center;
   font-size: 1.2em;
+}
+#emptymessage{
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}
+#cart {
+  margin: 0.5em;
+  margin-left: 40%;
+}
+.rightalign{
+  text-align: right;
+}
+.centeralign{
+  text-align: center;
 }

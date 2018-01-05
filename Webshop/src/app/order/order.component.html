@@ -1,0 +1,32 @@
+<mat-card>
+  <div class="row" *ngIf="order">
+    <div class="col-md-3">
+      <p><strong>Bestelnummer:</strong> {{order.id}}</p>
+      <p><strong>Besteldatum:</strong> {{convertDate(order.orderDate)}}</p>
+      <p><strong>Status:</strong> {{order.orderState}}</p>
+    </div>
+    <div class="col-md-6">
+        <table  class="table">
+          <thead>
+          <tr>
+            <th>Product</th>
+            <th class="centeralign">Aantal</th>
+            <th class="rightalign">Prijs</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let cartRowProduct of order.orderRows">
+          <tr>
+            <td> {{cartRowProduct.product.name}}</td>
+            <td class="centeralign"> {{cartRowProduct.amount}}</td>
+            <td class="rightalign"> {{cartRowProduct.product.price * cartRowProduct.amount | currency:'EUR':true:'1.2-2'}}</td>
+          </tr>
+          </tbody>
+        </table>
+    </div>
+    <div class="col-md-3">
+      <p><strong>Totaalprijs:</strong> {{getTotalPrice(order) | currency:'EUR':true:'1.2-2'}}</p>
+      <p><strong>Bezorging:</strong> {{order.delivery}}</p>
+      <p><strong>Betaald met:</strong> {{order.paymentBank}}</p>
+    </div>
+  </div>
+</mat-card>

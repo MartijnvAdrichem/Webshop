@@ -5,9 +5,19 @@
 @import "assets/css/lifestyle.min.css";
 @import "assets/css/google-font.css";
 body{
-  background: url("https://i.imgur.com/nRmugUR.jpg") no-repeat fixed;
+  background: url("https://i.imgur.com/rUxvagB.jpg") no-repeat;
+  background-size:auto;
 }
 @font-face {
   font-family: AvengerFont;
   src: url("AVENGEANCE HEROIC AVENGER.ttf");
+
+}
+
+@media screen and (min-width: 2500px) {
+  body{
+    /* background: url("https://i.imgur.com/nRmugUR.jpg") no-repeat fixed; */
+    background: url("https://i.imgur.com/rUxvagB.jpg") no-repeat fixed;
+    background-size:auto;
+  }
 }

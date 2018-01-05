@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from '../account';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {AccountService} from "../account.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../auth/auth.service";
 import {current} from "codelyzer/util/syntaxKind";
 
@@ -18,7 +18,7 @@ export class AccountRegisterComponent implements OnInit {
   buttonEnable: boolean = false;
 
 
-  constructor(private accountService:AccountService, private authService: AuthService){
+  constructor(private accountService:AccountService, private authService: AuthService, private router:Router){
   }
 
   ngOnInit() {
@@ -26,7 +26,7 @@ export class AccountRegisterComponent implements OnInit {
 
   public createAccount():void{
     this.accountService.createAccount(this.account).subscribe(accountGegevens => {
-      this.goAccountOverview();
+      this.router.navigate(['home'])
     }, (err: any) => {
 
     })
@@ -34,7 +34,7 @@ export class AccountRegisterComponent implements OnInit {
 
   public updateAccount():void{
     this.accountService.updateAccount(this.account).subscribe(accountGegevens => {
-      this.goAccountOverview();
+      this.router.navigate(['home'])
     }, (err: any) => {
       //do error handling
     });
@@ -55,9 +55,6 @@ export class AccountRegisterComponent implements OnInit {
     }
   }
 
-  public goAccountOverview(){
-    this.accountService.goAccountOverview();
-  }
 }
 
 
