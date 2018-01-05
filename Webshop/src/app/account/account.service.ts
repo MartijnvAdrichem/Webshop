@@ -49,9 +49,6 @@ export class AccountService {
     return this.http.get<Account[]>('api/account/all')
   }
 
-  public goAccountOverview() {
-    this.router.navigate(['/account']);
-  }
 
 
 }

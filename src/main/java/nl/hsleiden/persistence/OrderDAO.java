@@ -66,7 +66,7 @@ public class OrderDAO {
 				createOrderRowStatement.setInt(3, order.getOrderRows().get(i).getAmount());
 				createOrderRowStatement.executeUpdate();
 			}
-			return new HttpResponse(Response.Status.OK, "Uw bestelling is succesvol afgehandelt en komt zo snel mogelijk bij u thuis");
+			return new HttpResponse(Response.Status.OK, "Uw bestelling is succesvol afgehandeld en komt zo snel mogelijk bij u thuis");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

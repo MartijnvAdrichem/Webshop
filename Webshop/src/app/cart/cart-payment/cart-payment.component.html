@@ -1,4 +1,4 @@
-<mat-card id="marginborder">
+<mat-card id="marginborder" class="row">
   <div class="row">
     <mat-card>
     <div class="row">
@@ -20,7 +20,7 @@
 
       </div>
       <div class="col-md-4">
-        <h2>Betaalmethode</h2>
+        <h2>Kies een bank</h2>
         <mat-select [(ngModel)] = "order.paymentBank" placeholder="selecteer bank">
         <mat-option *ngFor="let payment of payments" [value]="payment.value">
           {{ payment.viewValue }}
@@ -38,7 +38,7 @@
     </div>
     <div class="col-md-4">
       <p>Subtotaal: {{cart.getTotalPrice() | currency:'EUR':true:'1.2-2'}}</p>
-      <p *ngIf="getVerzendKosten()==0">Verzendkosten: <span class="glyphicon glyphicon-ok"></span> Verzending is gratis </p>
+      <p *ngIf="getVerzendKosten()==0">Verzendkosten: <span class="glyphicon glyphicon-ok"> </span>  Verzending is gratis </p>
       <p *ngIf="getVerzendKosten()!=0">Verzendkosten: {{getVerzendKosten()}}</p>
       <h2>Totaalprijs: {{(cart.getTotalPrice() + getVerzendKosten()) | currency:'EUR':true:'1.2-2'}}</h2>
     </div>

@@ -38,6 +38,7 @@ import { OrderComponent } from './order/order.component';
 import { CartPaymentComponent } from './cart/cart-payment/cart-payment.component';
 import {OrderService} from "./order/order.service";
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   exports: [],
@@ -56,6 +57,7 @@ import { OrderHistoryComponent } from './order/order-history/order-history.compo
     OrderComponent,
     CartPaymentComponent,
     OrderHistoryComponent,
+    HomeComponent,
   ],
   imports: [
     MatInputModule,

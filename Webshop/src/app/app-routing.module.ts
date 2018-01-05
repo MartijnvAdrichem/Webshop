@@ -12,9 +12,11 @@ import {ProductOverviewComponent} from "./product/product-overview/product-overv
 import {CartOverviewComponent} from "./cart/cart-overview/cart-overview.component";
 import {CartPaymentComponent} from "./cart/cart-payment/cart-payment.component";
 import {OrderHistoryComponent} from "./order/order-history/order-history.component";
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
-  //{ path: '', redirectTo: 'products/Stripboeken', pathMatch: "full"},
+  { path: '', redirectTo: 'home', pathMatch: "full"},
+  { path: 'home', component: HomeComponent},
   { path: 'login', component: LoginComponent},
   { path: 'products/:type', component: ProductOverviewComponent},
   { path: 'account/register', component: AccountRegisterComponent},

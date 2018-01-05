@@ -5,13 +5,14 @@ import {CartRow} from "./cart-row";
 import {isUndefined} from "util";
 import {CartRowProduct} from "./cart-row-product";
 import {ProductService} from "../product/product.service";
+import {MessageService} from "../shared/message/message.service";
 
 @Injectable()
 export class CartService {
 
   amountInCart:number
 
-  constructor(private productService:ProductService) {
+  constructor(private productService:ProductService, private messageService:MessageService) {
     this.calculateAmountinCart();
   }
 
@@ -30,6 +31,7 @@ export class CartService {
       if(productsInCart[i].prodid == product.id){
         productExists = true;
         productsInCart[i].amount += amount;
+        this.messageService.notificationSuccess.next("Het product " + product.name + " is toegevoegd aan het winkelmandje");
       }
     }
     //Product does not exists in the list yet, so we add it as a new row
@@ -38,8 +40,8 @@ export class CartService {
       cartRow.prodid = product.id;
       cartRow.amount = amount;
       productsInCart.push(cartRow);
+      this.messageService.notificationSuccess.next("Het product " + product.name + " is toegevoegd aan het winkelmandje");
     }
-
     localStorage.setItem('cart', JSON.stringify(productsInCart));
     this.calculateAmountinCart();
 

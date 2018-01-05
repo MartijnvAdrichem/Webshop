@@ -1,4 +1,4 @@
-<div id="centered">
+<div id="centered" class="row">
   <h1 id="title">Winkelmandje</h1>
   <p id="emptymessage" *ngIf="isCartEmpty()">uw winkelmandje is nog leeg!</p>
  <div *ngIf="!isCartEmpty()">
@@ -7,9 +7,9 @@
     <tr>
       <th></th>
       <th>Product</th>
-      <th>Prijs</th>
-      <th>Aantal</th>
-      <th>Totaalprijs</th>
+      <th class="rightalign">Prijs</th>
+      <th class="centeralign">Aantal</th>
+      <th class="rightalign">Totaalprijs</th>
       <th></th>
     </tr>
     </thead>
@@ -17,14 +17,14 @@
       <tr>
         <td><img id="product-img" src={{cartRowProduct.product.imageURL}}></td>
         <td>{{cartRowProduct.product.name}}</td>
-        <td>{{cartRowProduct.product.price | currency:'EUR':true:'1.2-2'}}</td>
-        <td> {{cartRowProduct.amount}}</td>
-        <td> {{cartRowProduct.product.price * cartRowProduct.amount | currency:'EUR':true:'1.2-2'}}</td>
+        <td class="rightalign">{{cartRowProduct.product.price | currency:'EUR':true:'1.2-2'}}</td>
+        <td class="centeralign"> {{cartRowProduct.amount}}</td>
+        <td class="rightalign"> {{cartRowProduct.product.price * cartRowProduct.amount | currency:'EUR':true:'1.2-2'}}</td>
         <td> <button (click)="removeOfCart(cartRowProduct.product.id)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
       </tr>
     </tbody>
   </table>
-     <p id="totaal">totaal: {{cart.getTotalPrice() | currency:'EUR':true:'1.2-2'}}</p>
+     <p id="totaal">Totaal: {{cart.getTotalPrice() | currency:'EUR':true:'1.2-2'}}</p>
     <button id = "cart" mat-raised-button color="warn" routerLink="payment"><span>Bestelling afronden</span></button>
   <br>
  </div>
