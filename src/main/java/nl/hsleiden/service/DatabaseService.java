@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class DatabaseService {
 	private Connection dbconnection;
 	private String username = "postgres";
-	private String password = "Tijgereetijs17!";
+	private String password = "MarvelWeb1!";
 	private String databaseAdress = "jdbc:postgresql://136.144.170.229/martijn";
 
 	public DatabaseService(){

@@ -12,9 +12,17 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a routerLink="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Mijn winkelmandje ( {{cartService.amountInCart}} )</a></li>
-      <li *ngIf="isAuthenticated() == false"><a routerLink="account/register"><span class="glyphicon glyphicon-user"></span> Registreren</a></li>
+      <li *ngIf="isAuthenticated() == false"><a routerLink="account/register/false"><span class="glyphicon glyphicon-user"></span> Registreren</a></li>
       <li *ngIf="isAuthenticated() == false"><a data-toggle="collapse" data-target="#login"><span class="glyphicon glyphicon-log-in"></span> Inloggen</a></li>
-      <li *ngIf="isAuthenticated() == true"><a routerLink="order/history"><span class="glyphicon glyphicon-log-in"></span> Mijn account</a></li>
+      <li *ngIf="isAuthenticated() == true" class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">Mijn account
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="" (click)="logout()">Uitloggen</a></li>
+          <li><a routerLink="order/history">Mijn bestellingen</a></li>
+          <li><a routerLink="account/register/true">Mijn gegevens</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>

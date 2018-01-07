@@ -33,11 +33,16 @@ export class AccountService {
   updateAccount(account: Account): Observable<any>{
 
     let accountGegevens = {
-      id: account.id,
+      id:account.id,
       firstname: account.firstname,
       prefix: account.prefix,
       lastname: account.lastname,
       password: account.password,
+      eMail: account.eMail,
+      street: account.street,
+      houseNumber: account.houseNumber,
+      zipCode: account.zipCode,
+      town: account.town,
     }
 
     console.log(accountGegevens);

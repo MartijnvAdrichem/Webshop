@@ -14,7 +14,6 @@ import {AppComponent} from "./app.component";
 import {HeaderComponent} from "./shared/header/header.component";
 import {LoginComponent} from "./auth/login/login.component";
 import {AccountRegisterComponent} from "./account/account-register/account-register.component";
-import {AccountInzageComponent} from "./account/account-overview/account-overview.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -39,6 +38,7 @@ import { CartPaymentComponent } from './cart/cart-payment/cart-payment.component
 import {OrderService} from "./order/order.service";
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
 import { HomeComponent } from './home/home.component';
+import { NumberOnlyDirective} from './number.directive';
 
 @NgModule({
   exports: [],
@@ -46,7 +46,6 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     LoginComponent,
     AccountRegisterComponent,
-    AccountInzageComponent,
     MessageComponent,
     AccountComponent,
     HeaderComponent,
@@ -58,6 +57,7 @@ import { HomeComponent } from './home/home.component';
     CartPaymentComponent,
     OrderHistoryComponent,
     HomeComponent,
+    NumberOnlyDirective,
   ],
   imports: [
     MatInputModule,

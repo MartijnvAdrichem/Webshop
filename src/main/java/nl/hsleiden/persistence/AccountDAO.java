@@ -21,6 +21,7 @@ public class AccountDAO {
 	private PreparedStatement authenticateStatement;
 	private PreparedStatement getGebruikerZonderWachtwoord;
 	private PreparedStatement updateStatement;
+	private PreparedStatement authenticateById;
 
 	public Connection dbConnection;
 	@Inject
@@ -37,7 +38,8 @@ public class AccountDAO {
 			selectAllAccountsStatement = dbConnection.prepareStatement("SELECT * FROM account");
 			getGebruikerZonderWachtwoord = dbConnection.prepareStatement("SELECT * FROM account WHERE acc_email = ?");
 			authenticateStatement = dbConnection.prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email FROM account WHERE acc_email = ? AND acc_wachtwoord = ?");
-			updateStatement = dbConnection.prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_email = ?, acc_wachtwoord = ?, acc_straat = ?, acc_postcode = ?, acc_huisnr = ?, acc_woonplaats = ? WHERE acc_id = ? ");
+			updateStatement = dbConnection.prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_email = ?, acc_straat = ?, acc_postcode = ?, acc_huisnr = ?, acc_woonplaats = ? WHERE acc_id = ? ");
+			authenticateById = dbConnection.prepareStatement("SELECT acc_id FROM account WHERE acc_id = ? AND acc_wachtwoord = ?");
 		}
 		catch(SQLException e){
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
@@ -65,16 +67,24 @@ public class AccountDAO {
 		}
 	}
 
-/*	public HttpResponse updateAccount(Account account){
+	public HttpResponse updateAccount(Account account){
 		try {
+			authenticateById.setInt(1, account.getId());
+			authenticateById.setString(2, account.getPassword());
+			ResultSet resultSet = authenticateById.executeQuery();
+			if(!resultSet.next()){
+				return new HttpResponse(Response.Status.FORBIDDEN, "Uw opgegeven wachtwoord komt niet overeen...");
+			}
+
 			updateStatement.setString(1, account.getFirstname());
 			updateStatement.setString(2, account.getPrefix());
 			updateStatement.setString(3,account.getLastname());
-			updateStatement.setString(4,account.getUsername());
-			updateStatement.setString(5, account.getPassword());
-			updateStatement.setBoolean(6,  account.getAdmin());
-			updateStatement.setBoolean(7   , account.getActive());
-			updateStatement.setInt(8, account.getId());
+			updateStatement.setString(4,account.geteMail());
+			updateStatement.setString(5,  account.getStreet());
+			updateStatement.setString(6,  account.getZipCode());
+			updateStatement.setString(7,  account.getHouseNumber());
+			updateStatement.setString(8,  account.getTown());
+			updateStatement.setInt(9, account.getId());
 
 			updateStatement.executeUpdate();
 			return new HttpResponse(Response.Status.OK, "Account succesvol bijgewerkt");
@@ -85,7 +95,7 @@ public class AccountDAO {
 		}
 
 	}
-*/
+
 
 	public Account getAccountById(int id){
 		try{

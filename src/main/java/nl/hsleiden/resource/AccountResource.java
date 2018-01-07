@@ -46,7 +46,7 @@ public class AccountResource
 	public Account getAuthenticatedAccount(@Auth Account account){
 		return account;
 	}
-	/*
+
 	@PUT
 	@Path("edit")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -58,5 +58,5 @@ public class AccountResource
 			return modelValidator.toResponse(e);
 		}
 	}
-	*/
+
 }

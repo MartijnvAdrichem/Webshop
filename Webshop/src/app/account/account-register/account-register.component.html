@@ -2,14 +2,15 @@
   <mat-card-header>
     <mat-card-title>
         <div>
-          <h1>Registreren</h1>
+          <h1 *ngIf="editingAccount==false">Registreren</h1>
+          <h1 *ngIf="editingAccount==true">Mijn gegevens</h1>
         </div>
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
 
-    <form name="registerForm" #registerForm="ngForm" (ngSubmit)="createAccount()">
+    <form name="registerForm" #registerForm="ngForm">
           <mat-form-field class="account-input-field">
            <input matInput placeholder="Voornaam"  name="firstname" required [(ngModel)] = "account.firstname" #firstname="ngModel">
             <mat-error [hidden]="firstname.valid">
@@ -63,6 +64,7 @@
             </mat-error>
           </mat-form-field>
 
+      <div *ngIf="editingAccount==false">
           <mat-form-field class="account-input-field">
             <input matInput placeholder="Wachtwoord" type="password" required name="password" [(ngModel)] = "account.password" (ngModelChange)="doPasswordsMatch()" #password="ngModel">
           </mat-form-field>
@@ -70,10 +72,20 @@
           <mat-form-field class="account-input-field">
             <input matInput placeholder="Wachtwoord herhalen" type="password" required name="passwordRepeat" [(ngModel)] = "account.passwordRepeat" (ngModelChange)="doPasswordsMatch()" #passwordRepeat="ngModel">
           </mat-form-field>
+      </div>
+      <div *ngIf="editingAccount==true">
+        <p><strong>Bevestig met uw wachtwoord:</strong></p>
+      <mat-form-field class="account-input-field">
+        <input matInput placeholder="Wachtwoord" type="password" required name="password" [(ngModel)] = "account.password" #password="ngModel">
+      </mat-form-field>
+      </div>
 
-          <button mat-raised-button type="submit" [disabled]="!buttonEnable || !registerForm.valid" ><span>Account aanmaken</span></button>
-          <button mat-raised-button class="mat-warn" routerLink="home"><span>Annuleren</span></button>
+        <div>
+      <button *ngIf="editingAccount==true" mat-raised-button type="submit" (click)="updateAccount()" [disabled]="!registerForm.valid" ><span>Gegevens aanpassen</span></button>
+      <button *ngIf="editingAccount==false" mat-raised-button type="submit" (click)="createAccount()" [disabled]="!passwordsMatch || !registerForm.valid" ><span>Account aanmaken</span></button>
+      </div>
         </form>
+        <button mat-raised-button class="mat-warn" routerLink="../../../home"><span>Annuleren</span></button>
 
   </mat-card-content>
 </mat-card>

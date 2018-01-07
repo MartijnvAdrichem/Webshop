@@ -10,7 +10,7 @@
   <mat-card-content>
     <form name="loginForm" #loginForm="ngForm" (ngSubmit)="login()">
       <mat-form-field class="full-width">
-        <input matInput type="username" name="username" placeholder="Gebruikersnaam" required [(ngModel)]="credentials.username" #username="ngModel" />
+        <input matInput type="username" name="username" placeholder="E-mail" required [(ngModel)]="credentials.username" #username="ngModel" />
         <mat-error [hidden]="username.valid">
           Dit veld is verplicht
         </mat-error>

@@ -24,9 +24,9 @@ public class AccountService {
 		return accountDAO.createAccount(account);
 	}
 
-	//public HttpResponse updateAccount(Account account) {
-		//return accountDAO.updateAccount(account);
-	//}
+	public HttpResponse updateAccount(Account account) {
+		return accountDAO.updateAccount(account);
+	}
 
 	public Account getAccountById(int id) {
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from '../account';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {AccountService} from "../account.service";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../auth/auth.service";
 import {current} from "codelyzer/util/syntaxKind";
 
@@ -16,12 +16,25 @@ export class AccountRegisterComponent implements OnInit {
   account: Account = new Account();
   passwordsMatch: boolean = true;
   buttonEnable: boolean = false;
+  editingAccount:boolean;
 
+  constructor(private accountService:AccountService, private authService: AuthService, private router:Router,  private route: ActivatedRoute){
+    this.route.params.subscribe(params => {
+      this.editingAccount = (params['edit'] == 'true');
 
-  constructor(private accountService:AccountService, private authService: AuthService, private router:Router){
+      if(this.editingAccount == false){
+        this.account = new Account();
+      } else {
+        this.authService.getAuthenticatedUser().subscribe(
+          resultAccount => {
+            this.account = resultAccount;
+          });
+      }
+    });
+
   }
-
   ngOnInit() {
+
   }
 
   public createAccount():void{
@@ -46,11 +59,9 @@ export class AccountRegisterComponent implements OnInit {
 
       if (this.account.password == this.account.passwordRepeat) {
         this.passwordsMatch = true;
-        this.buttonEnable = true;
       }
       else {
         this.passwordsMatch = false;
-        this.buttonEnable = false;
 
     }
   }

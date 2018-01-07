@@ -9,7 +9,7 @@
 
       <div class="row bottom">
         <div class="col-md-8"><p id="prijs">Prijs: {{product.price | currency:'EUR':true:'1.2-2'}}</p></div>
-        <div class="col-md-2"><input id="inputamount" type="number" [(ngModel)] = "amount"></div>
+        <div class="col-md-2"><input id="inputamount" type="number" myNumberOnly  [(ngModel)] = "amount"></div>
         <div class="col-md-2"><button mat-raised-button color="warn" (click)="addProductToCart()"><span>Toevoegen</span></button></div>
       </div>
     </div>

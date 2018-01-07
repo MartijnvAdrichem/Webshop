@@ -5,7 +5,7 @@
 @import "assets/css/lifestyle.min.css";
 @import "assets/css/google-font.css";
 body{
-  background: url("https://i.imgur.com/rUxvagB.jpg") no-repeat;
+  background: url("https://i.imgur.com/rUxvagB.jpg") no-repeat fixed;
   background-size:auto;
 }
 @font-face {
