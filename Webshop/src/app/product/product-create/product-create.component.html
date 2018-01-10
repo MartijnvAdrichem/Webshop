@@ -1,0 +1,45 @@
+<div class="row">
+  <mat-card>
+    <h1 class="title">Nieuw product</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="product naam" name="name" required  [(ngModel)] = "product.name" #name="ngModel">
+          <mat-error [hidden]="name.valid">
+            Dit veld is verplicht
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="product omschrijving" name="description" required  [(ngModel)] = "product.description" #description="ngModel">
+          <mat-error [hidden]="description.valid">
+            Dit veld is verplicht
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="prijs" name="price" type="number" required  [(ngModel)] = "product.price" #price="ngModel">
+          <mat-error [hidden]="price.valid">
+            Dit veld is verplicht
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-select [(ngModel)] = "product.type" placeholder="selecteer bank" #type="ngModel">
+          <mat-option *ngFor="let type of productTypes" [value]="type.value">
+            {{ type.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-form-field>
+          <input matInput placeholder="afbeelding url" name="imageURL" required  [(ngModel)] = "product.imageURL" #imageURL="ngModel">
+          <mat-error [hidden]="imageURL.valid">
+            Dit veld is verplicht
+          </mat-error>
+        </mat-form-field>
+        <button *ngIf="editingProduct==true" mat-raised-button type="submit" (click)="updateAccount()"  ><span>Product aanpassen</span></button>
+        <button *ngIf="editingProduct==false" mat-raised-button type="submit" (click)="makeProduct()" ><span>Product aanmaken</span></button>
+
+      </div>
+
+    </div>
+
+  </mat-card>
+</div>

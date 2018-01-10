@@ -59,7 +59,7 @@ public class Account implements Principal {
 	@Length(min = 1, max = 255, message = "  moet minimaal 1 en maximaal 80 characters lang zijn")
 	String town;
 
-
+	boolean isAdmin = false;
 
 	public Account(){
 
@@ -158,6 +158,14 @@ public class Account implements Principal {
 
 	public void setTown(String town) {
 		this.town = town;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean admin) {
+		isAdmin = admin;
 	}
 
 	@Override

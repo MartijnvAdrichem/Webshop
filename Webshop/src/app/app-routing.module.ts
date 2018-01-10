@@ -13,6 +13,7 @@ import {CartOverviewComponent} from "./cart/cart-overview/cart-overview.componen
 import {CartPaymentComponent} from "./cart/cart-payment/cart-payment.component";
 import {OrderHistoryComponent} from "./order/order-history/order-history.component";
 import {HomeComponent} from "./home/home.component";
+import {ProductCreateComponent} from "./product/product-create/product-create.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: "full"},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'cart', component: CartOverviewComponent},
   { path: 'cart/payment', component:CartPaymentComponent, canActivate: [AuthGuardService]},
   { path: 'order/history', component:OrderHistoryComponent, canActivate:[AuthGuardService]},
+  { path: 'product/create', component:ProductCreateComponent, canActivate:[AuthGuardService]},
 ];
 
 @NgModule({

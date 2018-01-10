@@ -39,6 +39,7 @@ import {OrderService} from "./order/order.service";
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
 import { HomeComponent } from './home/home.component';
 import { NumberOnlyDirective} from './number.directive';
+import { ProductCreateComponent } from './product/product-create/product-create.component';
 
 @NgModule({
   exports: [],
@@ -58,6 +59,7 @@ import { NumberOnlyDirective} from './number.directive';
     OrderHistoryComponent,
     HomeComponent,
     NumberOnlyDirective,
+    ProductCreateComponent,
   ],
   imports: [
     MatInputModule,

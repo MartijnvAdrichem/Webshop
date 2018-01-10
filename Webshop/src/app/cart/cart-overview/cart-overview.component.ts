@@ -35,8 +35,23 @@ export class CartOverviewComponent implements OnInit {
     return false;
   }
 
+  addAmount(cartRowProduct:CartRowProduct){
+    cartRowProduct.amount += 1;
+    this.cartService.addToCart(cartRowProduct.product, 1);
+  }
+
+  removeAmount(cartRowProduct:CartRowProduct) {
+    cartRowProduct.amount -= 1;
+    if(cartRowProduct.amount < 1){
+      cartRowProduct.amount = 1;
+      return;
+    }
+    this.cartService.addToCart(cartRowProduct.product, -1);
+  }
+
   ngOnInit() {
     this.cart = this.cartService.getCart();
+
   }
 
 }
