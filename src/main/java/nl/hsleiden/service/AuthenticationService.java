@@ -49,6 +49,9 @@ public class AuthenticationService implements Authenticator<JwtContext, Account>
 		if(user == null){
 			return false;
 		}
+		if(roleName.equals("Admin")){
+		    return user.isAdmin();
+        }
 
 		return true;
     }

@@ -1,12 +1,14 @@
 package nl.hsleiden.persistence;
 
 import com.google.inject.Inject;
+import nl.hsleiden.HttpResponse;
 import nl.hsleiden.model.CartRowProduct;
 import nl.hsleiden.model.Order;
 import nl.hsleiden.model.Product;
 import nl.hsleiden.service.DatabaseService;
 
 import javax.inject.Singleton;
+import javax.ws.rs.core.Response;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +21,7 @@ public class ProductDAO {
 
 	private PreparedStatement getProductsbyTypeStatement;
 	private PreparedStatement getProductsInformationStatement;
+	private PreparedStatement createProductsStatement;
 
 	public Connection dbConnection;
 
@@ -33,6 +36,7 @@ public class ProductDAO {
 		try {
 			getProductsbyTypeStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_type = CAST(? AS producttype)");
 			getProductsInformationStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_id = ?");
+			createProductsStatement = dbConnection.prepareStatement("INSERT INTO product(prod_naam, prod_beschrijving, prod_prijs, prod_image, prod_type) VALUES (?,?,?,?,CAST(? AS producttype))");
 		} catch (SQLException e) {
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
 		}
@@ -99,5 +103,20 @@ public class ProductDAO {
 			order.getOrderRows().get(i).setProduct(newProduct);
 		}
 		return order;
+	}
+
+	public HttpResponse createProduct(Product product){
+		try {
+			createProductsStatement.setString(1, product.getName());
+			createProductsStatement.setString(2, product.getDescription());
+			createProductsStatement.setDouble(3, product.getPrice());
+			createProductsStatement.setString(4, product.getImageURL());
+			createProductsStatement.setString(5, product.getType());
+			createProductsStatement.executeUpdate();
+			return new HttpResponse(Response.Status.OK, "Product toegevoegd");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new HttpResponse(Response.Status.INTERNAL_SERVER_ERROR, "Er is iets mis gegaan bij product toevoegen");
 	}
 }

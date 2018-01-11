@@ -117,6 +117,7 @@ public class AccountDAO {
 			account.setHouseNumber(resultSet.getString("acc_huisnr"));
 			account.setTown(resultSet.getString("acc_woonplaats"));
 			account.setId(resultSet.getInt("acc_id"));
+			account.setAdmin(resultSet.getBoolean("acc_isadmin"));
 
 			return account;
 		}
@@ -173,6 +174,7 @@ public class AccountDAO {
 			account.setHouseNumber(resultSet.getString("acc_huisnr"));
 			account.setTown(resultSet.getString("acc_woonplaats"));
 			account.setId(resultSet.getInt("acc_id"));
+			account.setAdmin(resultSet.getBoolean("acc_isadmin"));
 			return account;
 
 

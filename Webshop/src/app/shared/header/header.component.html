@@ -8,7 +8,6 @@
       <li><a routerLink="products/Stripboeken">Stripboeken</a></li>
       <li><a routerLink="products/Films">Films</a></li>
       <li><a routerLink="products/Merchandise">Merchandise</a></li>
-      <li><a routerLink="products/T-shirts">T-shirts</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a routerLink="cart"><span class="glyphicon glyphicon-shopping-cart"></span> Mijn winkelmandje ( {{cartService.amountInCart}} )</a></li>
@@ -21,6 +20,7 @@
           <li><a routerLink="" (click)="logout()">Uitloggen</a></li>
           <li><a routerLink="order/history">Mijn bestellingen</a></li>
           <li><a routerLink="account/register/true">Mijn gegevens</a></li>
+          <li *ngIf="authService.isAdmin == true"><a routerLink="product/create">Nieuw product</a></li>
         </ul>
       </li>
     </ul>

@@ -22,5 +22,15 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
   }
 
+  addAmount(){
+    this.amount += 1;
+  }
+
+  removeAmount() {
+    this.amount -= 1;
+    if(this.amount < 1){
+      this.amount = 1;
+    }
+  }
 
 }

@@ -1,5 +1,6 @@
 package nl.hsleiden.service;
 
+import nl.hsleiden.HttpResponse;
 import nl.hsleiden.model.Product;
 import nl.hsleiden.persistence.ProductDAO;
 
@@ -45,4 +46,7 @@ public class ProductService {
 		return productDAO.getProductsInformation(prodid);
 	}
 
+	public HttpResponse createProduct(Product product){
+		return productDAO.createProduct(product);
+	}
 }

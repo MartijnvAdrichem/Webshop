@@ -47,6 +47,7 @@ export class CartService {
 
   }
 
+
   calculateAmountinCart() {
     let productsInCart:CartRow[];
     productsInCart = JSON.parse(localStorage.getItem('cart'));

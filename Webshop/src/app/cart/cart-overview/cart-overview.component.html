@@ -8,7 +8,7 @@
       <th></th>
       <th>Product</th>
       <th class="rightalign">Prijs</th>
-      <th class="centeralign">Aantal</th>
+      <th>Aantal</th>
       <th class="rightalign">Totaalprijs</th>
       <th></th>
     </tr>
@@ -18,7 +18,7 @@
         <td><img id="product-img" src={{cartRowProduct.product.imageURL}}></td>
         <td>{{cartRowProduct.product.name}}</td>
         <td class="rightalign">{{cartRowProduct.product.price | currency:'EUR':true:'1.2-2'}}</td>
-        <td class="centeralign"> {{cartRowProduct.amount}}</td>
+        <td><button (click)="removeAmount(cartRowProduct)"><span class="glyphicon glyphicon-minus"></span></button> <strong> {{cartRowProduct.amount}} </strong><button (click)="addAmount(cartRowProduct)"><span class="glyphicon glyphicon-plus"></span></button></td>
         <td class="rightalign"> {{cartRowProduct.product.price * cartRowProduct.amount | currency:'EUR':true:'1.2-2'}}</td>
         <td> <button (click)="removeOfCart(cartRowProduct.product.id)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
       </tr>

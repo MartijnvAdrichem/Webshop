@@ -7,6 +7,7 @@ import nl.hsleiden.View;
 import nl.hsleiden.model.Account;
 import nl.hsleiden.service.AccountService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;

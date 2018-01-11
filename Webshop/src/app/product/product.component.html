@@ -8,8 +8,8 @@
       <p>{{product.description}}</p>
 
       <div class="row bottom">
-        <div class="col-md-8"><p id="prijs">Prijs: {{product.price | currency:'EUR':true:'1.2-2'}}</p></div>
-        <div class="col-md-2"><input id="inputamount" type="number" myNumberOnly  [(ngModel)] = "amount"></div>
+        <div class="col-md-6"><p id="prijs">Prijs: {{product.price | currency:'EUR':true:'1.2-2'}}</p></div>
+        <div class="col-md-4"><div class="row"><button (click)="removeAmount()"><span class="glyphicon glyphicon-minus"></span></button> <strong> {{amount}} </strong><button (click)="addAmount()"><span class="glyphicon glyphicon-plus"></span></button></div></div>
         <div class="col-md-2"><button mat-raised-button color="warn" (click)="addProductToCart()"><span>Toevoegen</span></button></div>
       </div>
     </div>

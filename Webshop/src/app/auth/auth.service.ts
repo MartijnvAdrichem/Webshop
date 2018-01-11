@@ -8,6 +8,8 @@ import {isUndefined} from "util";
 @Injectable()
 export class AuthService {
 
+  isAdmin:boolean = false;
+
   public login(body): Observable<JSON> {
     return this.http.post("/api/login", body);
   }
@@ -23,6 +25,7 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return this.tokenService.isAuthenticated();
   }
+
 
   constructor(private http: HttpClient, private tokenService:TokenService) { }
 

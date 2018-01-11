@@ -10,4 +10,5 @@ export class Account{
   town:string;
   password: string;
   passwordRepeat: string;
+  admin: boolean;
 }

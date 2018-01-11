@@ -7,12 +7,11 @@ import nl.hsleiden.model.Product;
 import nl.hsleiden.service.AccountService;
 import nl.hsleiden.service.ProductService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
 @Singleton
@@ -51,4 +50,11 @@ public class ProductResource {
 	}
 
 
+	@POST
+	@Path("/create")
+	@RolesAllowed("Admin")
+	@JsonView(View.Public.class)
+	public Response createProduct(Product product){
+		return productService.createProduct(product).send();
+	}
 }

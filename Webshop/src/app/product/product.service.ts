@@ -6,6 +6,7 @@ import {Product} from "./product";
 @Injectable()
 export class ProductService {
 
+
   constructor(private http: HttpClient) { }
 
   public getProductsbyFilter(filter): Observable<Product[]> {
@@ -20,5 +21,9 @@ export class ProductService {
         idString += ids[i] + "-";
       }
     return this.http.get<Product[]>('api/product/'  + idString);
+  }
+
+  public makeProduct(product:Product): Observable<any>{
+   return this.http.post('api/product/create', product);
   }
 }
