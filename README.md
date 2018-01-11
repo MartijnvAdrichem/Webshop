@@ -2,14 +2,16 @@
 
 In dit project wordt er een webshop gemaakt in Angular 4 en Dropwizard
 
-#Hsleiden
+# Hsleiden
+
 Dit project is in opdracht van Hsleiden. Voor de module IPRWC moeten we een webshop maken. 
 Deze webshop zal gaan over het verkopen van Marvel Comics.
 
 Let op: Deze webshop is niet echt en is alleen gemaakt voor leerdoeleinden
 
 
-#Uri's
+# Uri's  
+
     PUT     /api/account/edit       Aanpassen account gegevens opslaan
     GET     /api/account/me         Ingelogt account ophalen
     POST    /api/account/register   Nieuw account aanmaken
@@ -20,7 +22,7 @@ Let op: Deze webshop is niet echt en is alleen gemaakt voor leerdoeleinden
     GET     /api/product/{ids}      Haal een aantal producten op volgens format id-id-id, dat streepje is verplicht
     
  
-#Inloggegevens
+# Inloggegevens  
 
-Username: Student@test.nl wachtwoord: Testen123
+Username: Student@test.nl wachtwoord: Testen123  
 Username: Docent@test.nl wachtwoord: TestDocent1
