@@ -12,6 +12,9 @@ export class ProductService {
   public getProductsbyFilter(filter): Observable<Product[]> {
     return this.http.get<Product[]>('api/product/list/' + filter);
   }
+  public getAllProducts():Observable<Product[]> {
+    return this.http.get<Product[]>('api/product/all');
+  }
 
   public getProductInformation(ids):Observable<Product[]>  {
      //Make a string of the product ids so we can send it to the API
@@ -25,5 +28,16 @@ export class ProductService {
 
   public makeProduct(product:Product): Observable<any>{
    return this.http.post('api/product/create', product);
+  }
+
+  public updateProduct(product:Product):Observable<any>{
+    return this.http.put('api/product/update', product);
+  }
+  public deletePrduct(id:number):Observable<any>{
+    return this.http.delete('api/product/delete/' + id);
+  }
+
+  public getProduct(id:number):Observable<Product>{
+    return this.http.get("api/product/get/" + id);
   }
 }

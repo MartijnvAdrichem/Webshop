@@ -49,4 +49,18 @@ public class ProductService {
 	public HttpResponse createProduct(Product product){
 		return productDAO.createProduct(product);
 	}
+
+	public ArrayList<Product> getAllProducts() {
+		return productDAO.getAllProducts();
+	}
+	public HttpResponse deleteProduct(int id) {
+		return productDAO.deleteProduct(id);
+	}
+
+	public Product getProduct(int id){
+		return this.productDAO.getProductsInformation(id);
+	}
+	public HttpResponse updateProduct(Product product){
+		return this.productDAO.updateProduct(product);
+	}
 }

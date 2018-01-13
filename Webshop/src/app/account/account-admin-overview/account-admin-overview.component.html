@@ -1,0 +1,25 @@
+<mat-card>
+  <h1 class="title">Accounts</h1>
+  <div class="row">
+    <table  class="table">
+      <thead>
+      <tr>
+        <th>Naam</th>
+        <th>E-mail</th>
+        <th>Straat</th>
+        <th>Postcode</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let account of accounts">
+      <tr>
+        <td> {{account.firstname}} {{account.prefix}} {{account.lastname}}</td>
+        <td> {{account.eMail}}</td>
+        <td> {{account.street}} {{account.houseNumber}}</td>
+        <td> {{account.zipCode}} {{account.town}}</td>
+        <td><button (click)="removeAccount(account)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>

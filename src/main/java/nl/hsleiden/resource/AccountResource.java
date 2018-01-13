@@ -60,4 +60,18 @@ public class AccountResource
 		}
 	}
 
+	@GET
+	@Path("all")
+	@RolesAllowed("Admin")
+	public ArrayList<Account> getAllAccounts(){
+		return service.getAllAccounts();
+	}
+
+	@DELETE
+	@Path("delete/{id}")
+	@RolesAllowed("Admin")
+	public Response deleteAccount(@PathParam("id") int id){
+		return service.deleteAccount(id).send();
+}
+
 }

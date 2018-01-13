@@ -1,0 +1,30 @@
+<mat-card>
+  <h1 class="title">Producten</h1>
+  <button mat-raised-button (click)="newProduct()"><span>Nieuw Product</span></button>
+  <div class="row">
+      <table  class="table">
+        <thead>
+        <tr>
+          <th>Product plaatje</th>
+          <th>Product naam</th>
+          <th>Product omschrijving</th>
+          <th>Product type</th>
+          <th>Product prijs</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let product of products">
+        <tr>
+          <td>  <img id="product-img" src={{product.imageURL}}></td>
+          <td> {{product.name}}</td>
+          <td> {{product.description}}</td>
+          <td>{{product.type}}</td>
+          <td class="rightalign"> {{product.price | currency:'EUR':true:'1.2-2'}}</td>
+          <td><button (click)="removeProduct(product)"><span class="glyphicon glyphicon-remove-sign"></span></button></td>
+          <td><button (click)="editProduct(product)"><span class="glyphicon glyphicon-pencil"></span></button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+</mat-card>

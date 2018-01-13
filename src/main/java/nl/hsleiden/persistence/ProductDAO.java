@@ -22,6 +22,9 @@ public class ProductDAO {
 	private PreparedStatement getProductsbyTypeStatement;
 	private PreparedStatement getProductsInformationStatement;
 	private PreparedStatement createProductsStatement;
+	private PreparedStatement getAllProductsStatement;
+	private PreparedStatement deleteProductStatement;
+	private PreparedStatement updateProductStatement;
 
 	public Connection dbConnection;
 
@@ -34,9 +37,12 @@ public class ProductDAO {
 
 	private void prepareStatements() {
 		try {
-			getProductsbyTypeStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_type = CAST(? AS producttype)");
+			getProductsbyTypeStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_type = CAST(? AS producttype) AND prod_actief = TRUE ");
 			getProductsInformationStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_id = ?");
 			createProductsStatement = dbConnection.prepareStatement("INSERT INTO product(prod_naam, prod_beschrijving, prod_prijs, prod_image, prod_type) VALUES (?,?,?,?,CAST(? AS producttype))");
+			getAllProductsStatement = dbConnection.prepareStatement("SELECT * FROM product WHERE prod_actief = TRUE");
+			deleteProductStatement = dbConnection.prepareStatement("UPDATE product SET prod_actief = false WHERE prod_id = ?");
+			updateProductStatement = dbConnection.prepareStatement("UPDATE product SET prod_naam = ?, prod_beschrijving = ?, prod_prijs = ?, prod_image = ?, prod_type = CAST(? AS producttype) WHERE prod_id = ?");
 		} catch (SQLException e) {
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
 		}
@@ -45,11 +51,31 @@ public class ProductDAO {
 	public ArrayList<Product> getProductsByType(String type) {
 		try {
 			System.out.println("Finding products for type " + type);
-			ArrayList<Product> products = new ArrayList<>();
 
 		getProductsbyTypeStatement.setString(1, type.toUpperCase());
 
 			ResultSet resultSet = getProductsbyTypeStatement.executeQuery();
+			ArrayList<Product> products = makeProductsArray(resultSet);
+			return products;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Product> getAllProducts() {
+		try {
+			ResultSet resultSet = getAllProductsStatement.executeQuery();
+			ArrayList<Product> products = makeProductsArray(resultSet);
+			return products;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Product> makeProductsArray(ResultSet resultSet) throws SQLException {
+		ArrayList<Product> products = new ArrayList<>();
 			while(resultSet.next()){
 				Product product = new Product();
 				product.setId(resultSet.getInt("prod_id"));
@@ -61,12 +87,18 @@ public class ProductDAO {
 				products.add(product);
 			}
 			return products;
+	}
+
+	public HttpResponse deleteProduct(int id) {
+		try {
+			deleteProductStatement.setInt(1, id);
+			deleteProductStatement.executeUpdate();
+			return new HttpResponse(Response.Status.OK, "Product succesvol deleted");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new HttpResponse(Response.Status.INTERNAL_SERVER_ERROR, "Er is iets mis gegaan bij het deleten van een product");
 	}
-
 	public Product getProductsInformation(int prodid){
 			try {
 				getProductsInformationStatement.setInt(1, prodid);
@@ -118,5 +150,21 @@ public class ProductDAO {
 			e.printStackTrace();
 		}
 		return new HttpResponse(Response.Status.INTERNAL_SERVER_ERROR, "Er is iets mis gegaan bij product toevoegen");
+	}
+
+	public HttpResponse updateProduct(Product product){
+		try {
+			updateProductStatement.setString(1,product.getName());
+			updateProductStatement.setString(2,product.getDescription());
+			updateProductStatement.setDouble(3,product.getPrice());
+			updateProductStatement.setString(4,product.getImageURL());
+			updateProductStatement.setString(5,product.getType());
+			updateProductStatement.setInt(6,product.getId());
+			updateProductStatement.executeUpdate();
+			return new HttpResponse(Response.Status.OK, "Product is bijgewerkt");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new HttpResponse(Response.Status.INTERNAL_SERVER_ERROR, "Er is iets mis gegaan bi het product bijwerken");
 	}
 }

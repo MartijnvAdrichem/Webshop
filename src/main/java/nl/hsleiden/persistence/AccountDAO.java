@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Response;
+import javax.xml.transform.Result;
 
 import com.google.inject.Inject;
 import nl.hsleiden.HttpResponse;
@@ -17,9 +18,10 @@ import nl.hsleiden.service.DatabaseService;
 public class AccountDAO {
 	private PreparedStatement createStatement;
 	private PreparedStatement getAccountByIdStatement;
-	private PreparedStatement selectAllAccountsStatement;
+	private PreparedStatement getAllAccountsStatement;
+	private  PreparedStatement deleteAccountStatement;
 	private PreparedStatement authenticateStatement;
-	private PreparedStatement getGebruikerZonderWachtwoord;
+	private PreparedStatement getAccountWithoutPassword;
 	private PreparedStatement updateStatement;
 	private PreparedStatement authenticateById;
 
@@ -35,12 +37,13 @@ public class AccountDAO {
 		try{
 			createStatement = dbConnection.prepareStatement("INSERT INTO account(acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email, acc_wachtwoord, acc_straat, acc_postcode, acc_huisnr, acc_woonplaats ) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)");
 			getAccountByIdStatement = dbConnection.prepareStatement("SELECT * FROM account WHERE acc_id = ?");
-			selectAllAccountsStatement = dbConnection.prepareStatement("SELECT * FROM account");
-			getGebruikerZonderWachtwoord = dbConnection.prepareStatement("SELECT * FROM account WHERE acc_email = ?");
+			getAllAccountsStatement = dbConnection.prepareStatement("SELECT * FROM account");
+			getAccountWithoutPassword = dbConnection.prepareStatement("SELECT * FROM account WHERE acc_email = ?");
 			authenticateStatement = dbConnection.prepareStatement("SELECT acc_id, acc_voornaam, acc_tussenvoegsel, acc_achternaam, acc_email FROM account WHERE acc_email = ? AND acc_wachtwoord = ?");
 			updateStatement = dbConnection.prepareStatement("UPDATE account SET acc_voornaam = ?, acc_tussenvoegsel = ?, acc_achternaam = ?, acc_email = ?, acc_straat = ?, acc_postcode = ?, acc_huisnr = ?, acc_woonplaats = ? WHERE acc_id = ? ");
 			authenticateById = dbConnection.prepareStatement("SELECT acc_id FROM account WHERE acc_id = ? AND acc_wachtwoord = ?");
-		}
+			deleteAccountStatement  = dbConnection.prepareStatement("DELETE FROM account WHERE acc_id = ?");
+			}
 		catch(SQLException e){
 			System.out.println("Error in the Prepare Statements (in AccountDao" + e.getStackTrace());
 		}
@@ -107,17 +110,7 @@ public class AccountDAO {
 				return null;
 			}
 
-			Account account = new Account();
-			account.setFirstname(resultSet.getString("acc_voornaam"));
-			account.setPrefix(resultSet.getString("acc_tussenvoegsel"));
-			account.setLastname(resultSet.getString("acc_achternaam"));
-			account.seteMail(resultSet.getString("acc_email"));
-			account.setStreet(resultSet.getString("acc_straat"));
-			account.setZipCode(resultSet.getString("acc_postcode"));
-			account.setHouseNumber(resultSet.getString("acc_huisnr"));
-			account.setTown(resultSet.getString("acc_woonplaats"));
-			account.setId(resultSet.getInt("acc_id"));
-			account.setAdmin(resultSet.getBoolean("acc_isadmin"));
+			Account account = makeAccount(resultSet);
 
 			return account;
 		}
@@ -155,26 +148,16 @@ public class AccountDAO {
 
 		try {
 
-			getGebruikerZonderWachtwoord.setString(1, username);
+			getAccountWithoutPassword.setString(1, username);
 
-			ResultSet resultSet = getGebruikerZonderWachtwoord.executeQuery();
+			ResultSet resultSet = getAccountWithoutPassword.executeQuery();
 
 			if (!resultSet.next()) {
 				return null;
 			}
 
 
-			Account account = new Account();
-			account.setFirstname(resultSet.getString("acc_voornaam"));
-			account.setPrefix(resultSet.getString("acc_tussenvoegsel"));
-			account.setLastname(resultSet.getString("acc_achternaam"));
-			account.seteMail(resultSet.getString("acc_email"));
-			account.setStreet(resultSet.getString("acc_straat"));
-			account.setZipCode(resultSet.getString("acc_postcode"));
-			account.setHouseNumber(resultSet.getString("acc_huisnr"));
-			account.setTown(resultSet.getString("acc_woonplaats"));
-			account.setId(resultSet.getInt("acc_id"));
-			account.setAdmin(resultSet.getBoolean("acc_isadmin"));
+			Account account = makeAccount(resultSet);
 			return account;
 
 
@@ -184,17 +167,42 @@ public class AccountDAO {
 		return null;
 	}
 
-	public Account makeAccount(ResultSet rs){
+	public Account makeAccount(ResultSet resultSet) throws SQLException{
+		Account account = new Account();
+		account.setFirstname(resultSet.getString("acc_voornaam"));
+		account.setPrefix(resultSet.getString("acc_tussenvoegsel"));
+		account.setLastname(resultSet.getString("acc_achternaam"));
+		account.seteMail(resultSet.getString("acc_email"));
+		account.setStreet(resultSet.getString("acc_straat"));
+		account.setZipCode(resultSet.getString("acc_postcode"));
+		account.setHouseNumber(resultSet.getString("acc_huisnr"));
+		account.setTown(resultSet.getString("acc_woonplaats"));
+		account.setId(resultSet.getInt("acc_id"));
+		account.setAdmin(resultSet.getBoolean("acc_isadmin"));
+		return account;
+	}
+
+	public HttpResponse deleteAccount(int accountid){
 		try {
-			Account account = new Account();
-			account.setId(rs.getInt("acc_id"));
-			account.setFirstname(rs.getString("acc_voornaam"));
-			account.setLastname(rs.getString("acc_achternaam"));
-			account.setPrefix(rs.getString("acc_tussenvoegsel"));
-			account.setPassword(rs.getString("acc_wachtwoord"));
+			deleteAccountStatement.setInt(1, accountid);
+			deleteAccountStatement.executeUpdate();
+			return new HttpResponse(Response.Status.OK, "Account succesvol verwijderd");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return new HttpResponse(Response.Status.INTERNAL_SERVER_ERROR, "Er is iets mis gegaan bij het verwijderen van het account");
+	}
 
-			return account;
+	public ArrayList<Account> getAllAccounts(){
+		try {
+			ResultSet resultSet = getAllAccountsStatement.executeQuery();
+			ArrayList<Account> accounts = new ArrayList();
 
+			while(resultSet.next()){
+				Account account = makeAccount(resultSet);
+				accounts.add(account);
+			}
+			return accounts;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

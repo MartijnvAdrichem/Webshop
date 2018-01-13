@@ -54,6 +54,9 @@ export class AccountService {
     return this.http.get<Account[]>('api/account/all')
   }
 
+  removeAccount(account:Account):Observable<any>{
+    return this.http.delete('api/account/delete/' + account.id);
+  }
 
 
 }

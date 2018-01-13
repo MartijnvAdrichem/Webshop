@@ -1,0 +1,12 @@
+#product-img{
+  max-width: 100px;
+  max-height: 100px;
+}
+.title{
+  font-weight: bold;
+  text-align: center;
+  font-size: 6em;
+  color: black;
+  font-family: AvengerFont;
+}
+

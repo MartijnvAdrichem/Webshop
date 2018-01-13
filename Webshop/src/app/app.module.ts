@@ -40,6 +40,8 @@ import { OrderHistoryComponent } from './order/order-history/order-history.compo
 import { HomeComponent } from './home/home.component';
 import { NumberOnlyDirective} from './number.directive';
 import { ProductCreateComponent } from './product/product-create/product-create.component';
+import { ProductAdminOverviewComponent } from './product/product-admin-overview/product-admin-overview.component';
+import { AccountAdminOverviewComponent} from "./account/account-admin-overview/account-admin-overview.component";
 
 @NgModule({
   exports: [],
@@ -60,6 +62,8 @@ import { ProductCreateComponent } from './product/product-create/product-create.
     HomeComponent,
     NumberOnlyDirective,
     ProductCreateComponent,
+    ProductAdminOverviewComponent,
+    AccountAdminOverviewComponent,
   ],
   imports: [
     MatInputModule,

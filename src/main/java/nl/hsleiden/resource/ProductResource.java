@@ -57,4 +57,35 @@ public class ProductResource {
 	public Response createProduct(Product product){
 		return productService.createProduct(product).send();
 	}
+
+	@GET
+	@Path("/all")
+	@RolesAllowed("Admin")
+	@JsonView(View.Public.class)
+	public ArrayList<Product> getAllProducts(){
+		return productService.getAllProducts();
+	}
+
+	@DELETE
+	@Path("/delete/{id}")
+	@RolesAllowed("Admin")
+	@JsonView(View.Public.class)
+	public Response deleteProduct(@PathParam("id") int id){
+		return productService.deleteProduct(id).send();
+	}
+
+	@GET
+	@Path("/get/{id}")
+	@RolesAllowed("Admin")
+	@JsonView(View.Public.class)
+	public Product getProduct(@PathParam("id") int id){
+		return productService.getProduct(id);
+	}
+	@PUT
+	@Path("/update")
+	@RolesAllowed("Admin")
+	@JsonView(View.Public.class)
+	public Response getProduct(Product product){
+		return productService.updateProduct(product).send();
+	}
 }

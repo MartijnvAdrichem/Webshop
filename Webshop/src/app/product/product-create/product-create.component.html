@@ -1,6 +1,6 @@
-<div class="row">
-  <mat-card>
-    <h1 class="title">Nieuw product</h1>
+<mat-card *ngIf="product">
+    <h1 class="title" *ngIf="editingProduct==false">Nieuw product</h1>
+  <h1 class="title" *ngIf="editingProduct==true">Product aanpassen</h1>
     <div class="row">
       <div class="col-md-6">
         <mat-form-field>
@@ -34,12 +34,8 @@
             Dit veld is verplicht
           </mat-error>
         </mat-form-field>
-        <button *ngIf="editingProduct==true" mat-raised-button type="submit" (click)="updateAccount()"  ><span>Product aanpassen</span></button>
+        <button *ngIf="editingProduct==true" mat-raised-button type="submit" (click)="updateProduct()"  ><span>Product aanpassen</span></button>
         <button *ngIf="editingProduct==false" mat-raised-button type="submit" (click)="makeProduct()" ><span>Product aanmaken</span></button>
-
       </div>
-
     </div>
-
   </mat-card>
-</div>

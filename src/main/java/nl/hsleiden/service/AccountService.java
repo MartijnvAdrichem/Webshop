@@ -41,5 +41,10 @@ public class AccountService {
 	public Account getAccountByUsername(String username){
 		return accountDAO.getAccountByUsername(username);
 	}
-
+	public ArrayList<Account> getAllAccounts(){
+		return accountDAO.getAllAccounts();
+	}
+	public HttpResponse deleteAccount(int accountid){
+		return accountDAO.deleteAccount(accountid);
+	}
 }

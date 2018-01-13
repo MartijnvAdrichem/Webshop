@@ -14,6 +14,8 @@ import {CartPaymentComponent} from "./cart/cart-payment/cart-payment.component";
 import {OrderHistoryComponent} from "./order/order-history/order-history.component";
 import {HomeComponent} from "./home/home.component";
 import {ProductCreateComponent} from "./product/product-create/product-create.component";
+import {ProductAdminOverviewComponent} from "./product/product-admin-overview/product-admin-overview.component";
+import {AccountAdminOverviewComponent} from "./account/account-admin-overview/account-admin-overview.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: "full"},
@@ -24,7 +26,9 @@ const routes: Routes = [
   { path: 'cart', component: CartOverviewComponent},
   { path: 'cart/payment', component:CartPaymentComponent, canActivate: [AuthGuardService]},
   { path: 'order/history', component:OrderHistoryComponent, canActivate:[AuthGuardService]},
-  { path: 'product/create', component:ProductCreateComponent, canActivate:[AuthGuardService]},
+  { path: 'product/create/:prodid', component:ProductCreateComponent, canActivate:[AuthGuardService]},
+  { path: 'product/all', component:ProductAdminOverviewComponent, canActivate:[AuthGuardService]},
+  { path: 'account/all', component:AccountAdminOverviewComponent, canActivate:[AuthGuardService]},
 ];
 
 @NgModule({
