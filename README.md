@@ -21,6 +21,14 @@ Let op: Deze webshop is niet echt en is alleen gemaakt voor leerdoeleinden
     GET     /api/product/list/{type} Producten in de shop opvrageb (type kan zijn Film, Merchandise of Stripboek)
     GET     /api/product/{ids}      Haal een aantal producten op volgens format id-id-id, dat streepje is verplicht
     
+    ADMIN ONLY
+    GET     /api/account/all            Haalt alle accounts op (Zonder wachtwoord)
+    DELETE  /api/account/delete/{id}    Deletes 1 account
+    GET     /api/product/all            Haalt alle producten op
+    POST    /api/product/create         Maak een nieuwe product
+    DELETE  /api/product/delete/{id}    Delete een product (zet op non-actief)
+    PUT     /api/product/update         Update een product
+    GET     /api/product/get/{id}       Haalt 1 product op voor product aanpassen
  
 # Inloggegevens  
 
