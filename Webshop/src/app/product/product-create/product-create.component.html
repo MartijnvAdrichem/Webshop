@@ -2,7 +2,8 @@
     <h1 class="title" *ngIf="editingProduct==false">Nieuw product</h1>
   <h1 class="title" *ngIf="editingProduct==true">Product aanpassen</h1>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
         <mat-form-field>
           <input matInput placeholder="product naam" name="name" required  [(ngModel)] = "product.name" #name="ngModel">
           <mat-error [hidden]="name.valid">
@@ -21,8 +22,6 @@
             Dit veld is verplicht
           </mat-error>
         </mat-form-field>
-      </div>
-      <div class="col-md-6">
         <mat-select [(ngModel)] = "product.type" placeholder="selecteer bank" #type="ngModel">
           <mat-option *ngFor="let type of productTypes" [value]="type.value">
             {{ type.viewValue }}
@@ -37,5 +36,6 @@
         <button *ngIf="editingProduct==true" mat-raised-button type="submit" (click)="updateProduct()"  ><span>Product aanpassen</span></button>
         <button *ngIf="editingProduct==false" mat-raised-button type="submit" (click)="makeProduct()" ><span>Product aanmaken</span></button>
       </div>
+      <div class="col-md-4"></div>
     </div>
   </mat-card>

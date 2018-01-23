@@ -1,0 +1,16 @@
+img{
+  max-height: 150px;
+  max-width: 150px;
+}
+
+.title{
+  font-weight: bold;
+  text-align: center;
+  font-size: 3em;
+  color: black;
+  font-family: AvengerFont;
+}
+
+.transparent{
+  background:rgba(255,255,255,0.75);
+}

@@ -4,7 +4,7 @@ import {MatSnackBar} from '@angular/material';
 import {Credentials} from "../credentials";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TokenService} from "../token/token.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {Account} from "../../account/account";
 
@@ -15,7 +15,7 @@ import {Account} from "../../account/account";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private location: Location, private authService: AuthService, public  snackBar: MatSnackBar, private tokenService: TokenService, private router:Router) {}
+  constructor(private location: Location, private authService: AuthService, public  snackBar: MatSnackBar, private tokenService: TokenService,  private route:ActivatedRoute, private router:Router) {}
   credentials: Credentials = new Credentials();
 
   public login(): void {
@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
         console.log(acc);
         this.authService.isAdmin = acc.admin;
       });
-        this.location.back();
+        if(this.location.path() === '/login') {
+          this.location.back();
+        }
       }, (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 403) {

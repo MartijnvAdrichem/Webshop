@@ -20,7 +20,6 @@
           <li><a routerLink="" (click)="logout()">Uitloggen</a></li>
           <li><a routerLink="order/history">Mijn bestellingen</a></li>
           <li><a routerLink="account/register/true">Mijn gegevens</a></li>
-          <li *ngIf="authService.isAdmin == true"><a routerLink="product/create">Nieuw product</a></li>
         </ul>
       </li>
       <li *ngIf="isAuthenticated() == true && authService.isAdmin == true" class="dropdown">
